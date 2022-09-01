@@ -30,7 +30,9 @@ function App() {
 
   return (
     <div className="App">
-      
+      {/* Top hero/nav panel with sub-menu */}
+      {/* List component and bulk of website */}
+      {/* Small bottom panel: attributions, etc. */}
     </div>
   );
 }
