@@ -29,12 +29,17 @@ function App() {
 
   useEffect(()=>{
     console.log('App.js is mounted.')
-    const fetchUserDB = async ()=>{
-      let response = await fetch(serverURL + "users")
-    }
+    // const fetchUserDB = async ()=>{
+    //   let response = await fetch(serverURL + "users")
+    // }
+    // const fetchUserItems = async ()=>{
+    //   let userID = cookieUser.user_id
+    //   let response = await fetch (serverURL + "items" + userID)
+    // }
     //screen size
     setThinScreen(thinScreenBool)
   })
+
 
   return (
     <div className="App">
