@@ -46,12 +46,12 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <HeroNav></HeroNav>
+        <HeroNav thinScreen={thinScreen}></HeroNav>
         <Routes>
-          <Route path='/' element={<ListPanel></ListPanel>}></Route>
-          <Route path='/user' element={<LoginReg></LoginReg>}></Route>
+          <Route path='/' element={<ListPanel thinScreen={thinScreen}></ListPanel>}></Route>
+          <Route path='/user' element={<LoginReg thinScreen={thinScreen}></LoginReg>}></Route>
         </Routes>
-        <Footer></Footer>
+        <Footer thinScreen={thinScreen}></Footer>
       </Router>
     </div>
   );
