@@ -6,3 +6,8 @@
     padding-left: 0.5em;
     text-shadow: 0.5px 0.5px grey;
 }
+
+.App{
+    background-color: #8e9aaf;
+    /* color: white; */
+}

@@ -3,7 +3,7 @@ import { Paper } from "@mui/material"
 const HeroNav = ({ thinScreen, user, setUser})=>{
     if(thinScreen){
         return(
-            <Paper elevation={12} sx={{
+            <Paper elevation={24} sx={{
                 bgcolor: "#94d2bd", 
                 minHeight: "4em",
                 display: 'flex',
