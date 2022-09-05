@@ -16,18 +16,19 @@ import HeroNav from './components/HeroNav';
 const serverURL = "http://localhost:3000/"
 
 function App() {
-
-  //state variables
-  let [thinScreen, setThinScreen] = useState(false)
-
-  //screen size state
-  const thinScreenBool = useMediaQuery('(max-width: 900px)')
-
   //cookies for login
   let cookieUser = Cookies.get('user')
   if(cookieUser){
     cookieUser = JSON.parse(cookieUser)
   }
+  //state variables
+  let [thinScreen, setThinScreen] = useState(false)
+  let [user, setUser] = useState(cookieUser)
+
+  //screen size state
+  const thinScreenBool = useMediaQuery('(max-width: 900px)')
+
+  
 
   useEffect(()=>{
     console.log('App.js is mounted.')
