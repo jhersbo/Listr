@@ -40,7 +40,7 @@ function App() {
     // }
     //screen size
     setThinScreen(thinScreenBool)
-  })
+  },[thinScreenBool])
 
 
   return (
