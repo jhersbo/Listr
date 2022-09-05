@@ -59,7 +59,7 @@ function App() {
       <Router>
         <HeroNav thinScreen={thinScreen} user={user} setUser={setUser}></HeroNav>
         <Routes>
-          <Route path='/' element={<ListPanel thinScreen={thinScreen} user={user} setUser={setUser} ></ListPanel>}></Route>
+          <Route path='/' element={<ListPanel thinScreen={thinScreen} user={user} setUser={setUser} listDB={listDB} ></ListPanel>}></Route>
           <Route path='/user' element={<LoginReg thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} setUserDB={setUserDB}></LoginReg>}></Route>
         </Routes>
         <Footer thinScreen={thinScreen}></Footer>
