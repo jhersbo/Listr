@@ -1,4 +1,5 @@
 import './App.css';
+import './FontImports.css'
 import {useState, useEffect} from 'react'
 import Cookies from 'cookies-js'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
@@ -25,11 +26,8 @@ function App() {
   let [userDB, setUserDB] = useState('')
   let [listDB, setListDB] = useState('')
   
-
   //screen size state
   const thinScreenBool = useMediaQuery('(max-width: 900px)')
-
-  
 
   useEffect(()=>{
     console.log('App.js is mounted.')

@@ -1,1 +1,8 @@
-
+.hero{
+    font-family: 'BhuTuka Expanded One', cursive;
+    font-weight: 1000;
+    margin: 0%;
+    padding-top: 0.5em;
+    padding-left: 0.5em;
+    text-shadow: 0.5px 0.5px grey;
+}
