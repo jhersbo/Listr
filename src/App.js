@@ -4,11 +4,13 @@ import {useState, useEffect} from 'react'
 import Cookies from 'cookies-js'
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"
 import { useMediaQuery } from '@mui/material'
-import HeroNav from './components/HeroNav';
+
 
 //components
 import ListPanel from './components/ListPanel';
 import LoginReg from './components/LoginReg';
+import Footer from './components/Footer';
+import HeroNav from './components/HeroNav';
 
 //server URL
 const serverURL = "http://localhost:3000/"
@@ -49,6 +51,7 @@ function App() {
           <Route path='/' element={<ListPanel></ListPanel>}></Route>
           <Route path='/user' element={<LoginReg></LoginReg>}></Route>
         </Routes>
+        <Footer></Footer>
       </Router>
     </div>
   );
