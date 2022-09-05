@@ -1,10 +1,8 @@
 import './App.css';
-
 import {useState, useEffect} from 'react'
 import Cookies from 'cookies-js'
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import { useMediaQuery } from '@mui/material'
-
 
 //components
 import ListPanel from './components/ListPanel';
