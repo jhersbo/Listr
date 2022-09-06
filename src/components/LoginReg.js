@@ -10,17 +10,21 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
     let [name, setName] = useState('')
     let [newUser, setNewUser] = useState(false)
     
-    const handleLogin = (e)=>{
-        let usernamesInDB = userDB.map(user => user.username)
-        let passwordsInDB = userDB.map(user => user.password)
-        if (usernamesInDB.includes(username) && passwordsInDB.includes(password)){
-            let index = usernamesInDB.indexOf(username)
-            if(userDB[index].password === password){
-                setUser(userDB[index])
-                Cookies.set('user', JSON.stringify(userDB[index]))
-                console.log('You are logged in')
-            }
-        }
+    const serverURL = "http://localhost:3000/"
+    
+    async function handleLogin(){
+        //not checked
+
+        
+        // let passwordsInDB = userDB.map(user => user.password)
+        // if (usernamesInDB.includes(username) && passwordsInDB.includes(password)){
+        //     let index = usernamesInDB.indexOf(username)
+        //     if(userDB[index].password === password){
+        //         setUser(userDB[index])
+        //         Cookies.set('user', JSON.stringify(userDB[index]))
+        //         console.log('You are logged in')
+        //     }
+        // }
     }
 
     const handleLogout = ()=>{
@@ -59,7 +63,7 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                             label="Password"
                             onChange={(e)=>{setPassword(e.target.value)}}
                             />
-                            <Button variant="contained" onClick={()=>{handleLogin()}} sx={{
+                            <Button variant="contained" onClick={async()=>{await handleLogin()}} sx={{
                                 marginTop: '2%'
                             }}>Login</Button>
                         </Card>
