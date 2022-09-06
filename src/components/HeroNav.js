@@ -22,7 +22,8 @@ const HeroNav = ({ thinScreen, user, setUser})=>{
                         width: '2em',
                         marginTop: '0.5em',
                         marginRight: '0.5em',
-                        boxShadow: '0px 1px 4px black'
+                        boxShadow: '0px 1px 4px black',
+                        backgroundColor: '#003554'
                     }}
                         
                     >

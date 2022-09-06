@@ -114,16 +114,21 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
         )
     }else{
         return(
-            <Paper elevation={2}>
+            <Paper elevation={2} sx={{
+                margin: '2%'
+            }}>
                 <Card sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
+                    justifyContent: 'center', 
+                    marginTop: '5%', 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    padding: '5%'
                 }}>
                     <h3>Account information</h3>
-                    <h7>Username: {user.username}</h7>
-                    <h7>Name: {user.name}</h7>
+                    <h6>Username: {user.username}</h6>
+                    <h6>Name: {user.name}</h6>
+                    <Button variant="contained" onClick={()=>{handleLogout()}}>Logout</Button>
                 </Card>
-                <Button variant="contained" onClick={()=>{handleLogout()}}>Logout</Button>
             </Paper>
         )
     }
