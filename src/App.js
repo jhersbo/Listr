@@ -20,7 +20,6 @@ function App() {
   if(cookieUser){
     // Cookies.set('user', undefined)
     cookieUser = JSON.parse(cookieUser)
-    console.log(cookieUser)
   }
   //state variables
   let [thinScreen, setThinScreen] = useState(false)
@@ -36,13 +35,11 @@ function App() {
     const fetchUserDB = async ()=>{
       let response = await fetch(serverURL + "users")
       let rData = await response.json()
-      console.log(rData)
       setUserDB(rData)
     }
     const fetchListDB = async ()=>{
       let response = await fetch (serverURL + "items")
       let rData = await response.json()
-      console.log(rData)
       setListDB(rData)
     }
     fetchUserDB()

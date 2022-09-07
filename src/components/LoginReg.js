@@ -2,6 +2,9 @@ import { useState } from "react"
 import Cookies from 'cookies-js'
 
 import { Card, Paper, TextField, Button } from "@mui/material"
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import { fontSize } from "@mui/system"
 
 const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
     
@@ -12,11 +15,18 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
     let [newUser, setNewUser] = useState(false)
     
     const serverURL = "http://localhost:3000/"
+
+    const buttonStyle = {
+        marginTop: '2%',
+        bgcolor: "#94d2bd",
+        color: 'black',
+        fontFamily: "Combo, cursive",
+        fontSize: "18px"
+    }
     
     async function handleLogin(){
         let isolatedUser = userDB.filter(user => user.username === username)
         let userID = isolatedUser[0].user_id
-        console.log(userID)
         let response = await fetch(serverURL + "users/auth",{
             method: "POST",
             headers: {
@@ -110,9 +120,7 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                             label="Password"
                             onChange={(e)=>{setPassword(e.target.value)}}
                             />
-                            <Button className="submit" variant="contained" onClick={async()=>{await handleLogin()}} sx={{
-                                marginTop: '2%'
-                            }}>Login</Button>
+                            <Button className="submit" variant="contained" onClick={async()=>{await handleLogin()}} sx={buttonStyle}>Login</Button>
                         </Card>
                         <Card sx={{
                             justifyContent: 'center', 
@@ -122,7 +130,19 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                             padding: '5%'
                         }}className="ind-cards">
                             <h5 style={{'margin': '0%'}}>Don't have an account?</h5>
-                            <Button variant="text" onClick={()=>{setNewUser(true)}}>Register Here!</Button>
+                            <Button variant="text" onClick={()=>{setNewUser(true)}}sx={{
+                                color: "#94d2bd",
+                                fontFamily: "Antonio, sans-serif",
+                                textShadow: "-1px -1px 0 #22223b, 1px -1px 0 #22223b, -1px 1px 0 #22223b, 1px 1px 0 #22223b;",
+                                fontSize: "21px",
+                                width: "50%",
+                                padding: "0%",
+                                alignSelf: "center"
+                            }}>
+                                <KeyboardDoubleArrowRightIcon></KeyboardDoubleArrowRightIcon>
+                                Register Here!
+                                <KeyboardDoubleArrowLeftIcon></KeyboardDoubleArrowLeftIcon>
+                            </Button>
                         </Card>
                     </Card>
                     :
@@ -159,9 +179,7 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                             label="Confirm Password"
                             onChange={(e)=>{setPasswordCON(e.target.value)}}
                             />
-                            <Button className="submit" variant="contained" onClick={async ()=>{await handleRegistration()}} sx={{
-                                marginTop: '2%'
-                            }}>Register</Button>
+                            <Button className="submit" variant="contained" onClick={async ()=>{await handleRegistration()}} sx={buttonStyle}>Register</Button>
                         </Card>
                         <Card sx={{
                             justifyContent: 'center', 
@@ -191,7 +209,7 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                     <h3>Account information</h3>
                     <h6>Username: {user.username}</h6>
                     <h6>Name: {user.name}</h6>
-                    <Button variant="contained" onClick={()=>{handleLogout()}}>Logout</Button>
+                    <Button variant="contained" onClick={()=>{handleLogout()}} sx={buttonStyle}>Logout</Button>
                 </Card>
             </Paper>
         )
