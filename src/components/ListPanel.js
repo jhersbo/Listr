@@ -18,7 +18,6 @@ const ListPanel = ({ thinScreen, user, listDB })=>{
         )
     }
 
-
 }
 
 export default ListPanel

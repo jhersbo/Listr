@@ -15,10 +15,12 @@ import HeroNav from './components/HeroNav';
 const serverURL = "http://localhost:3000/"
 
 function App() {
-  //cookies for login
+
   let cookieUser = Cookies.get('user')
   if(cookieUser){
+    // Cookies.set('user', undefined)
     cookieUser = JSON.parse(cookieUser)
+    console.log(cookieUser)
   }
   //state variables
   let [thinScreen, setThinScreen] = useState(false)
