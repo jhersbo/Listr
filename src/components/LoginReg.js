@@ -85,18 +85,19 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
     if(!user){
         return(
             <Paper elevation={2} sx={{
-                margin: '2%'
+                margin: '2%',
+                boxShadow: "5px 5px 20px black"
             }}>
                 {!newUser?
-                    <Card>
+                    <Card className="account-screen">
                         <Card sx={{
                             justifyContent: 'center', 
-                            marginTop: '5%', 
+                            marginTop: '0%', 
                             display: 'flex', 
                             flexDirection: 'column', 
-                            padding: '5%'
-                        }}>
-                            <h3>Log in</h3>
+                            padding: '3%'
+                        }} className="ind-cards">
+                            <h3>Log in here!</h3>
                             <TextField
                             required
                             id="outlined-required"
@@ -109,7 +110,7 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                             label="Password"
                             onChange={(e)=>{setPassword(e.target.value)}}
                             />
-                            <Button variant="contained" onClick={async()=>{await handleLogin()}} sx={{
+                            <Button className="submit" variant="contained" onClick={async()=>{await handleLogin()}} sx={{
                                 marginTop: '2%'
                             }}>Login</Button>
                         </Card>
@@ -119,20 +120,20 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                             display: 'flex', 
                             flexDirection: 'column', 
                             padding: '5%'
-                        }}>
+                        }}className="ind-cards">
                             <h5 style={{'margin': '0%'}}>Don't have an account?</h5>
                             <Button variant="text" onClick={()=>{setNewUser(true)}}>Register Here!</Button>
                         </Card>
                     </Card>
                     :
-                    <Card>
+                    <Card className="account-screen">
                         <Card sx={{
                             justifyContent: 'center', 
                             marginTop: '5%', 
                             display: 'flex', 
                             flexDirection: 'column', 
                             padding: '5%'
-                        }}>
+                        }} className="ind-cards">
                             <h3>Register Here</h3>
                             <TextField
                             required
@@ -158,7 +159,7 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                             label="Confirm Password"
                             onChange={(e)=>{setPasswordCON(e.target.value)}}
                             />
-                            <Button variant="contained" onClick={async ()=>{await handleRegistration()}} sx={{
+                            <Button className="submit" variant="contained" onClick={async ()=>{await handleRegistration()}} sx={{
                                 marginTop: '2%'
                             }}>Register</Button>
                         </Card>
@@ -168,7 +169,7 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                             display: 'flex', 
                             flexDirection: 'column', 
                             padding: '5%'
-                        }}>
+                        }} className="ind-cards">
                         </Card>
                     </Card>
                 }
@@ -177,9 +178,10 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
     }else{
         return(
             <Paper elevation={2} sx={{
-                margin: '2%'
+                margin: '2%',
+                boxShadow: "5px 5px 20px black"
             }}>
-                <Card sx={{
+                <Card className="account-screen"sx={{
                     justifyContent: 'center', 
                     marginTop: '5%', 
                     display: 'flex', 

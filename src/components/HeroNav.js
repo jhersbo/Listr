@@ -10,7 +10,8 @@ const HeroNav = ({ thinScreen, user, setUser})=>{
                 minHeight: "4em",
                 display: 'flex',
                 alignContent: 'center',
-                justifyContent: "space-between"
+                justifyContent: "space-between",
+                boxShadow: "0px 5px 20px black"
 
             }}>
                 <h1 className="hero">Listr</h1>
