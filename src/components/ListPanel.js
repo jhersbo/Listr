@@ -1,22 +1,28 @@
 import ListItem from "./ListItem"
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 
 const ListPanel = ({ thinScreen, user, listDB })=>{
+    //with react-beautiful-dnd
+    const reorder = (list, startIndex, endIndex)=>{
+        let result = Array.from(list)
+        let [removed] = result.splice(startIndex, 1)
+        result.splice(endIndex, 0, removed)
+    }
 
-    // if(!user){
-    //     return(
-    //         <h3>Sign in to manage your list.</h3>
-    //     )
-    // }else{
-    //     const usersList = listDB.filter(element => element.user_id === user.user_id)
-    //     const individualItems = usersList.map((item, index)=>{
-    //         return(
-    //             <ListItem key={item.item_id} user={user} thinScreen={thinScreen} listDB={listDB}></ListItem>
-    //         )
-    //     })
-    //     return(
-    //         <h3>Sug</h3>
-    //     )
-    // }
+    //one list to another
+    const move = (source, destination, droppableSource, droppableDestination)=>{
+        let sourceClone = Array.from(source)
+        let destClone = Array.from(destination)
+        let [removed] = sourceClone.splice(droppableSource.index, 1)
+        
+        destClone.splice(droppableDestination.index, 0, removed)
+
+        const result = {}
+        result[droppableSource.droppableId] = sourceClone
+        result[droppableDestination.droppableId] = destClone
+
+        return result;
+    }
 
 }
 
