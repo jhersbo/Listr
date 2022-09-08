@@ -2,6 +2,13 @@ import ListItem from "./ListItem"
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 
 const ListPanel = ({ thinScreen, user, listDB })=>{
+    // fake data generator
+    const getItems = (count, offset = 0) =>
+        Array.from({ length: count }, (v, k) => k).map(k => ({
+            id: `item-${k + offset}-${new Date().getTime()}`,
+            content: `item ${k + offset}`
+    }));
+    
     //with react-beautiful-dnd
     const reorder = (list, startIndex, endIndex)=>{
         let result = Array.from(list)
