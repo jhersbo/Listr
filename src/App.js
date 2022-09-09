@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import { useMediaQuery } from '@mui/material'
 
 //components
-import ListPanel from './components/ListPanel';
+import ListArea from './components/ListArea';
 import LoginReg from './components/LoginReg';
 import Footer from './components/Footer';
 import HeroNav from './components/HeroNav';
@@ -26,6 +26,11 @@ function App() {
   let [user, setUser] = useState(cookieUser)
   let [userDB, setUserDB] = useState('')
   let [listDB, setListDB] = useState('')
+
+  //user-specific states
+  let [userListDB, setUserListDB] = useState(null)
+  let [noLists, setNoLists] = useState(false)
+  
   
   //screen size state
   const thinScreenBool = useMediaQuery('(max-width: 900px)')
@@ -38,22 +43,22 @@ function App() {
       setUserDB(rData)
     }
 
-    //depricated
     const fetchListDB = async ()=>{
       let response = await fetch (serverURL + "lists")
       let rData = await response.json()
-      console.log(rData)
-      let parsed = rData.map((element) => element.list_arr)
-      let jsParsed = parsed.map(element => JSON.parse(element))
-      console.log(parsed)
-      console.log(jsParsed)
       setListDB(rData)
+      
+
+      console.log(listDB)
+    
+
     }
+
     fetchUserDB()
     fetchListDB()
     //screen size
     setThinScreen(thinScreenBool)
-  },[thinScreenBool, user])
+  },[thinScreenBool])
 
 
   return (
@@ -61,8 +66,14 @@ function App() {
       <Router>
         <HeroNav thinScreen={thinScreen} user={user} setUser={setUser}></HeroNav>
         <Routes>
-          <Route path='/' element={<ListPanel thinScreen={thinScreen} user={user} setUser={setUser} listDB={listDB} ></ListPanel>}></Route>
-          <Route path='/user' element={<LoginReg thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} setUserDB={setUserDB}></LoginReg>}></Route>
+          <Route path='/' element={
+            <ListArea thinScreen={thinScreen} user={user} setUser={setUser} listDB={listDB} setListDB={setListDB} userListDB={userListDB} setUserListDB={setUserListDB} noLists={noLists} setNoLists={setNoLists}></ListArea>
+            }>
+          </Route>
+          <Route path='/user' element={
+          <LoginReg thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} setUserDB={setUserDB}></LoginReg>
+          }>
+          </Route>
         </Routes>
         <Footer thinScreen={thinScreen}></Footer>
       </Router>
