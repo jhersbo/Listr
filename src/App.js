@@ -37,9 +37,16 @@ function App() {
       let rData = await response.json()
       setUserDB(rData)
     }
+
+    //depricated
     const fetchListDB = async ()=>{
-      let response = await fetch (serverURL + "items")
+      let response = await fetch (serverURL + "lists")
       let rData = await response.json()
+      console.log(rData)
+      let parsed = rData.map((element) => element.list_arr)
+      let jsParsed = parsed.map(element => JSON.parse(element))
+      console.log(parsed)
+      console.log(jsParsed)
       setListDB(rData)
     }
     fetchUserDB()
