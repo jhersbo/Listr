@@ -21,11 +21,12 @@ function App() {
     // Cookies.set('user', undefined)
     cookieUser = JSON.parse(cookieUser)
   }
-  //state variables
+
+  //app-wide state variables
   let [thinScreen, setThinScreen] = useState(false)
   let [user, setUser] = useState(cookieUser)
   let [userDB, setUserDB] = useState('')
-  let [listDB, setListDB] = useState('')
+  let [listDB, setListDB] = useState(null)
 
   //user-specific states
   let [userListDB, setUserListDB] = useState(null)
@@ -47,18 +48,15 @@ function App() {
       let response = await fetch (serverURL + "lists")
       let rData = await response.json()
       setListDB(rData)
-      
-
       console.log(listDB)
-    
-
     }
+
 
     fetchUserDB()
     fetchListDB()
     //screen size
     setThinScreen(thinScreenBool)
-  },[thinScreenBool])
+  },[thinScreenBool, user])
 
 
   return (
@@ -67,7 +65,7 @@ function App() {
         <HeroNav thinScreen={thinScreen} user={user} setUser={setUser}></HeroNav>
         <Routes>
           <Route path='/' element={
-            <ListArea thinScreen={thinScreen} user={user} setUser={setUser} listDB={listDB} setListDB={setListDB} userListDB={userListDB} setUserListDB={setUserListDB} noLists={noLists} setNoLists={setNoLists}></ListArea>
+            <ListArea thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} listDB={listDB} setListDB={setListDB} userListDB={userListDB} setUserListDB={setUserListDB} noLists={noLists} setNoLists={setNoLists}></ListArea>
             }>
           </Route>
           <Route path='/user' element={

@@ -4,7 +4,7 @@ import { Card, Paper } from "@mui/material";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useState, useEffect } from "react";
 
-const ListPanel = ({ thinScreen, user, listDB, setListDB, userListDB, setUserListDB, noLists, setNoLists })=>{
+const ListPanel = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, setUserListDB, noLists, setNoLists })=>{
     // fake data generator
     const getItems = (count, offset = 0) =>
         Array.from({ length: count }, (v, k) => k).map(k => ({
@@ -35,15 +35,19 @@ const ListPanel = ({ thinScreen, user, listDB, setListDB, userListDB, setUserLis
     }
 
     const assignUserLists = async ()=>{
-        let userListsArr = await listDB.filter(element => element.user_id === user.user_id)
-        setUserListDB(userListsArr)
-        console.log(userListDB)
-        //having issues setting the no list state. It will set the "no list" state if the API call takes too long, but will correct once the listDB variable is set. 
+        if(listDB !== null){
+            let userListsArr = await listDB.filter(element => element.user_id === user.user_id)
+            setUserListDB(userListsArr)
+            console.log(userListDB)
+        }else{
+            return
+        }
+        //having issues setting the no list state. It will set the "no list" state if the API call takes too long, but will correct once the listDB variable is set. Maybe try .then in useEffect?
     }
 
     useEffect(()=>{
         assignUserLists()
-    }, [user, listDB])
+    }, [user, userDB, listDB])
 
     // const renderList = ()=>{
     //     userListDB.map((element, index)=>{
