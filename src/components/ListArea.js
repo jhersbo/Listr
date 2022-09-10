@@ -49,29 +49,45 @@ const ListPanel = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, se
         assignUserLists()
     }, [user, userDB, listDB])
 
-    // const renderList = ()=>{
-    //     userListDB.map((element, index)=>{
-    //         return(
-    //             <Card key={index}>
-    //                 <h5>item</h5>
-    //             </Card>
-    //         )
-    //     })
-    // }
+    const renderList = ()=>{
+        if(userListDB){
+            return(
+                userListDB.map((element, index)=>{
+                    return(
+                        <div>
+                            <Card key={index}>
+                                <h5>item</h5>
+                            </Card>
+                        </div>
+                    )
+                })
+            )
+        }else{
+            return(
+                <h3>Loading...</h3>
+            )
+        }
+    }
     
-    if(user){
+    if(user && listDB){
         return(
             <Paper>
                 <h1>Your list:</h1>
                 <Paper>
-                    {/* {renderList} */}
+                    {renderList()}
                 </Paper>
+            </Paper>
+        )
+    }else if(!user){
+        return(
+            <Paper>
+                <h2>Sign in to manage your lists.</h2>
             </Paper>
         )
     }else{
         return(
             <Paper>
-                <h2>Sign in to manage your lists.</h2>
+                <h2>Loading...</h2>
             </Paper>
         )
     }
