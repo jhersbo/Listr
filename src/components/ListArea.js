@@ -55,8 +55,8 @@ const ListPanel = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, se
                 userListDB.map((element, index)=>{
                     return(
                         <div>
-                            <Card key={index}>
-                                <h5>item</h5>
+                            <Card>
+                                <h5 key={element.list_id}>List Thumbnail Here</h5>
                             </Card>
                         </div>
                     )
