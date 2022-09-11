@@ -3,6 +3,7 @@ import ListColumn from "./minor-components/ListColumn";
 import { Card, Paper } from "@mui/material";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useState, useEffect } from "react";
+// import Cookies from "cookies";
 
 const ListPanel = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, setUserListDB, noLists, setNoLists })=>{
     // fake data generator
@@ -34,6 +35,9 @@ const ListPanel = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, se
         return result;
     }
 
+    //component states
+    let [activeList, setActiveList] = useState(null)
+
     const assignUserLists = async ()=>{
         if(listDB !== null){
             let userListsArr = await listDB.filter(element => element.user_id === user.user_id)
@@ -51,12 +55,15 @@ const ListPanel = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, se
 
     const renderList = ()=>{
         if(userListDB){
+            let sortedByDate = userListDB.sort((a, b)=>{
+                return Date.parse(b.date_created) - Date.parse(a.date_created)
+            })
             return(
-                userListDB.map((element, index)=>{
+                sortedByDate.map((element, index)=>{
                     return(
                         <div>
-                            <Card>
-                                <h5 key={element.list_id}>List Thumbnail Here</h5>
+                            <Card onClick={()=>{setActiveList(element)}}>
+                                <h5 key={element.list_id}>{element.list_name}</h5>
                             </Card>
                         </div>
                     )
@@ -69,10 +76,10 @@ const ListPanel = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, se
         }
     }
     
-    if(user && listDB){
+    if(user && listDB && !activeList){
         return(
             <Paper>
-                <h1>Your list:</h1>
+                <h1>Your lists:</h1>
                 <Paper>
                     {renderList()}
                 </Paper>
@@ -84,11 +91,9 @@ const ListPanel = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, se
                 <h2>Sign in to manage your lists.</h2>
             </Paper>
         )
-    }else{
+    }else if(activeList){
         return(
-            <Paper>
-                <h2>Loading...</h2>
-            </Paper>
+            <ListColumn activeList={activeList}></ListColumn>
         )
     }
 
