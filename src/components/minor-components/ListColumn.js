@@ -3,7 +3,7 @@ import ListItems from "./ListItems"
 
 const ListColumn = ({ activeList })=>{
 
-    const renderList = ()=>{
+    const renderColumn = ()=>{
         if(activeList){
             let parsedColumns = JSON.parse(activeList.list_arr)
             console.log(parsedColumns)
@@ -23,10 +23,14 @@ const ListColumn = ({ activeList })=>{
     }
 
     return(
-        <Paper>
+        <Paper elevation={2} sx={{
+            margin: '2%',
+            boxShadow: "5px 5px 20px black",
+            padding: "3%"
+        }}>
             <h3>{activeList.list_name}</h3>
             <Card>
-                {renderList()}
+                {renderColumn()}
             </Card>
         </Paper>
     )

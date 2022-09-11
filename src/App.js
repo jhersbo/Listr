@@ -10,6 +10,7 @@ import ListArea from './components/ListArea';
 import LoginReg from './components/LoginReg';
 import Footer from './components/Footer';
 import HeroNav from './components/HeroNav';
+import CreateList from './components/CreateList';
 
 //server URL
 const serverURL = "http://localhost:3000/"
@@ -68,6 +69,9 @@ function App() {
             <ListArea thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} listDB={listDB} setListDB={setListDB} userListDB={userListDB} setUserListDB={setUserListDB} noLists={noLists} setNoLists={setNoLists}></ListArea>
             }>
           </Route>
+          <Route path='/create' element={
+            <CreateList></CreateList>
+          }></Route>
           <Route path='/user' element={
           <LoginReg thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} setUserDB={setUserDB}></LoginReg>
           }>

@@ -1,11 +1,11 @@
 import ListColumn from "./minor-components/ListColumn";
 
-import { Card, Paper } from "@mui/material";
+import { Card, Paper, Button } from "@mui/material";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useState, useEffect } from "react";
 // import Cookies from "cookies";
 
-const ListPanel = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, setUserListDB, noLists, setNoLists })=>{
+const ListArea = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, setUserListDB, noLists, setNoLists })=>{
     // fake data generator
     const getItems = (count, offset = 0) =>
         Array.from({ length: count }, (v, k) => k).map(k => ({
@@ -38,6 +38,10 @@ const ListPanel = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, se
     //component states
     let [activeList, setActiveList] = useState(null)
 
+    const newListPage = ()=>{
+        window.location.href = "/create"
+    }
+
     const assignUserLists = async ()=>{
         if(listDB !== null){
             let userListsArr = await listDB.filter(element => element.user_id === user.user_id)
@@ -53,7 +57,7 @@ const ListPanel = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, se
         assignUserLists()
     }, [user, userDB, listDB])
 
-    const renderList = ()=>{
+    const renderLists = ()=>{
         if(userListDB){
             let sortedByDate = userListDB.sort((a, b)=>{
                 return Date.parse(b.date_created) - Date.parse(a.date_created)
@@ -78,16 +82,33 @@ const ListPanel = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, se
     
     if(user && listDB && !activeList){
         return(
-            <Paper>
-                <h1>Your lists:</h1>
+            //button for creating new list
+            <Paper elevation={2} sx={{
+                margin: '2%',
+                boxShadow: "5px 5px 20px black"
+            }}>
+                <h2>Your lists:</h2>
+                <Button variant="text" onClick={()=>{newListPage()}}sx={{
+                    color: "#94d2bd",
+                    fontFamily: "Antonio, sans-serif",
+                    textShadow: "-1px -1px 0 #22223b, 1px -1px 0 #22223b, -1px 1px 0 #22223b, 1px 1px 0 #22223b;",
+                    fontSize: "21px",
+                    width: "50%",
+                    padding: "0%",
+                    alignSelf: "center"
+                }}>New List                                
+                </Button>
                 <Paper>
-                    {renderList()}
+                    {renderLists()}
                 </Paper>
             </Paper>
         )
     }else if(!user){
         return(
-            <Paper>
+            <Paper elevation={2} sx={{
+                margin: '2%',
+                boxShadow: "5px 5px 20px black"
+            }}>
                 <h2>Sign in to manage your lists.</h2>
             </Paper>
         )
@@ -99,4 +120,4 @@ const ListPanel = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, se
 
 }
 
-export default ListPanel
+export default ListArea
