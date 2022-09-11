@@ -85,7 +85,8 @@ const ListArea = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, set
             //button for creating new list
             <Paper elevation={2} sx={{
                 margin: '2%',
-                boxShadow: "5px 5px 20px black"
+                boxShadow: "5px 5px 20px black",
+                padding: "3%"
             }}>
                 <h2>Your lists:</h2>
                 <Button variant="text" onClick={()=>{newListPage()}}sx={{
