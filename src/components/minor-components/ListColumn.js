@@ -12,8 +12,7 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
 
     let [addingIndex, setAddingIndex] = useState(null)
     let [newItemContent, setNewItemContent] = useState('')
-
-    let parsedColumns = JSON.parse(activeList.list_arr)
+    let [parsedColumns, setParsedColumns] = useState(JSON.parse(activeList.list_arr))
 
     console.log(parsedColumns)
 
@@ -55,6 +54,7 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
         })
         console.log(response)
         setAddingIndex(null)
+        setClearList(true)
         //have to get it to render without refresh
         //add delete buttons
     }

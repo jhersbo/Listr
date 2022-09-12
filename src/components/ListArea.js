@@ -39,6 +39,11 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
     let [activeList, setActiveList] = useState(null)
     let [clearList, setClearList] = useState(false)
 
+    // if(clearList){
+    //     ListColumn.render()
+    //     setClearList(true)
+    // }
+
     const newListPage = ()=>{
         window.location.href = "/create"
     }
