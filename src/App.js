@@ -60,7 +60,6 @@ function App() {
     //screen size
     setThinScreen(thinScreenBool)
     setWindowAddress(window.location.href)
-    console.log(windowAddress)
   },[thinScreenBool, user])
 
 
@@ -81,7 +80,7 @@ function App() {
           }>
           </Route>
         </Routes>
-        {windowAddress === clientURL? <Footer thinScreen={thinScreen}></Footer>: null}
+        {/* {windowAddress === clientURL? <Footer thinScreen={thinScreen}></Footer>: null} */}
       </Router>
     </div>
   );

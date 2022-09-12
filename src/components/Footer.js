@@ -1,4 +1,4 @@
-import { Paper } from "@mui/material"
+import { Paper, Button } from "@mui/material"
 
 const Footer = ()=>{
     return (
@@ -16,7 +16,7 @@ const Footer = ()=>{
             width: "98%",
             left: "1%"
         }}>
-            {/* <h6>Footer</h6> */}
+            <Button></Button>
         </Paper>
     )
 }
