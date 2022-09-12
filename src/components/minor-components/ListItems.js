@@ -1,7 +1,7 @@
 import { Card } from "@mui/material"
 
 const ListItem = ({ parsedItems, activeList, setActiveList })=>{
-
+    
     const renderList = ()=>{
         let itemList = parsedItems.map((item, index)=>{
             return(

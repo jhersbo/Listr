@@ -37,6 +37,7 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
 
     //component states
     let [activeList, setActiveList] = useState(null)
+    let [clearList, setClearList] = useState(false)
 
     const newListPage = ()=>{
         window.location.href = "/create"
@@ -121,7 +122,7 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
         )
     }else if(activeList){
         return(
-            <ListColumn activeList={activeList} setActiveList={setActiveList} user={user} setUser={setUser} userListDB={userListDB} setUserListDB={setUserListDB}></ListColumn>
+            <ListColumn activeList={activeList} setActiveList={setActiveList} user={user} setUser={setUser} userListDB={userListDB} setUserListDB={setUserListDB} listDB={listDB} setListDB={setListDB} clearList={clearList} setClearList={setClearList}></ListColumn>
         )
     }
 

@@ -5,7 +5,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ListItems from "./ListItems"
 import { useState } from "react";
 
-const ListColumn = ({ activeList, setActiveList, user, setUser })=>{
+const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListDB, clearList, setClearList })=>{
 
     //server URL
     const serverURL = "http://localhost:3000/"
@@ -73,7 +73,7 @@ const ListColumn = ({ activeList, setActiveList, user, setUser })=>{
                         flexDirection: "column"
                     }}>
                         <h4>{element.column_title}</h4>
-                        <ListItems activeList={activeList} setActiveList={setActiveList}parsedItems={parsedItems}></ListItems>
+                        <ListItems activeList={activeList} setActiveList={setActiveList}parsedItems={parsedItems} clearList={clearList} setClearList={setClearList}></ListItems>
 
                         {addingIndex === index?
                             <Card sx={{
