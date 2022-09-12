@@ -4,7 +4,7 @@ const Footer = ()=>{
     return (
         <Paper elevation={24} sx={{
             bgcolor: "#94d2bd", 
-            minHeight: "2em",
+            minHeight: "5%",
             display: 'flex',
             alignContent: 'center',
             justifyContent: "center",
@@ -16,7 +16,7 @@ const Footer = ()=>{
             width: "98%",
             left: "1%"
         }}>
-            <h1>Footer</h1>
+            {/* <h6>Footer</h6> */}
         </Paper>
     )
 }

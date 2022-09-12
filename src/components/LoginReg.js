@@ -25,6 +25,7 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
     }
     
     async function handleLogin(){
+        //add behavior for when username is not found/wrong
         let isolatedUser = userDB.filter(user => user.username === username)
         let userID = isolatedUser[0].user_id
         let response = await fetch(serverURL + "users/auth",{

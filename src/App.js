@@ -1,4 +1,3 @@
-import './App.css';
 import './FontImports.css'
 import './sassStyles/sassStyles.scss'
 import {useState, useEffect} from 'react'
