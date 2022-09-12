@@ -9,6 +9,10 @@ const ListColumn = ({ activeList, setActiveList })=>{
 
     let [addingIndex, setAddingIndex] = useState(null)
     let [newItemContent, setNewItemContent] = useState('')
+
+    const saveNewItem = ()=>{
+        setAddingIndex(null)
+    }
     
     let parsedColumns = JSON.parse(activeList.list_arr)
 
@@ -26,14 +30,25 @@ const ListColumn = ({ activeList, setActiveList })=>{
                     }}>
                         <h4>{element.column_title}</h4>
                         <ListItems activeList={activeList} parsedItems={parsedItems}></ListItems>
+
                         {addingIndex === index?
-                            <Card>
-                                <TextField></TextField>
-                                <Button>Save</Button>
+                            <Card sx={{
+                                boxShadow: "none",
+                                bgcolor: "#fefae0",
+                                display: "flex",
+                                flexDirection: "column"
+                            }}>
+                                <TextField sx={{
+                                    bgcolor: "white",
+                                    margin: "0.5em",
+                                    boxShadow: "1px 1px 7px black"
+                                }} onChange={(e)=>{setNewItemContent(e.target.value)}}></TextField>
+                                <Button onClick={()=>{saveNewItem()}}>Save</Button>
                             </Card>
                         :
                             null    
                         }
+
                         <Button sx={{
                             border: "1px solid #003554",
                             borderRadius: "15%",
