@@ -5,7 +5,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useState, useEffect } from "react";
 // import Cookies from "cookies";
 
-const ListArea = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, setUserListDB, noLists, setNoLists })=>{
+const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userListDB, setUserListDB, noLists, setNoLists })=>{
     // fake data generator
     const getItems = (count, offset = 0) =>
         Array.from({ length: count }, (v, k) => k).map(k => ({
@@ -121,7 +121,7 @@ const ListArea = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, set
         )
     }else if(activeList){
         return(
-            <ListColumn activeList={activeList} setActiveList={setActiveList}></ListColumn>
+            <ListColumn activeList={activeList} setActiveList={setActiveList} user={user} setUser={setUser} userListDB={userListDB} setUserListDB={setUserListDB}></ListColumn>
         )
     }
 

@@ -5,22 +5,66 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ListItems from "./ListItems"
 import { useState } from "react";
 
-const ListColumn = ({ activeList, setActiveList })=>{
+const ListColumn = ({ activeList, setActiveList, user, setUser })=>{
+
+    //server URL
+    const serverURL = "http://localhost:3000/"
 
     let [addingIndex, setAddingIndex] = useState(null)
     let [newItemContent, setNewItemContent] = useState('')
 
-    const saveNewItem = ()=>{
-        setAddingIndex(null)
-    }
-    
     let parsedColumns = JSON.parse(activeList.list_arr)
+
+    console.log(parsedColumns)
+
+    const saveNewItem = async (element)=>{
+        let newList = element.items.concat({
+            id: `item-${new Date().getTime()}`,
+            content: newItemContent,
+            notes: null
+        })
+        parsedColumns[addingIndex].items = newList
+        //this works in adding to the list. Just need to persist changes now
+        console.log(newList)
+        console.log(parsedColumns)
+        //this fetch request is timing out. the one on Postman also does.
+        
+        await fetch(serverURL + "lists", {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                list_id: activeList.list_id
+            })
+        })
+        
+        
+        let response = await fetch(serverURL + "lists" , {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                list_id: activeList.list_id,
+                list_name: activeList.list_name, 
+                list_arr: JSON.stringify(parsedColumns),
+                date_created: new Date(),
+                user_id: user.user_id
+            })
+        })
+        console.log(response)
+        setAddingIndex(null)
+        //have to get it to render without refresh
+        //add delete buttons
+    }
 
     const renderColumn = ()=>{
         if(activeList){
+            // console.log(activeList)
             let mappedList = parsedColumns.map((element, index) =>{
                 let parsedItems = element.items
-                console.log(parsedItems)
+                // console.log(parsedItems)
                 return(
                     <Card key={index} className="scroll-box" sx={{
                         boxShadow: "none",
@@ -29,7 +73,7 @@ const ListColumn = ({ activeList, setActiveList })=>{
                         flexDirection: "column"
                     }}>
                         <h4>{element.column_title}</h4>
-                        <ListItems activeList={activeList} parsedItems={parsedItems}></ListItems>
+                        <ListItems activeList={activeList} setActiveList={setActiveList}parsedItems={parsedItems}></ListItems>
 
                         {addingIndex === index?
                             <Card sx={{
@@ -43,7 +87,7 @@ const ListColumn = ({ activeList, setActiveList })=>{
                                     margin: "0.5em",
                                     boxShadow: "1px 1px 7px black"
                                 }} onChange={(e)=>{setNewItemContent(e.target.value)}}></TextField>
-                                <Button onClick={()=>{saveNewItem()}}>Save</Button>
+                                <Button onClick={async ()=>{await saveNewItem(element)}}>Save</Button>
                             </Card>
                         :
                             null    
