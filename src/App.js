@@ -1,5 +1,6 @@
 import './App.css';
 import './FontImports.css'
+import './sassStyles/sassStyles.scss'
 import {useState, useEffect} from 'react'
 import Cookies from 'cookies-js'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
@@ -15,6 +16,9 @@ import CreateList from './components/CreateList';
 //server URL
 const serverURL = "http://localhost:3000/"
 
+//local address
+const clientURL = "http://localhost:3001/"
+
 function App() {
 
   let cookieUser = Cookies.get('user')
@@ -28,6 +32,7 @@ function App() {
   let [user, setUser] = useState(cookieUser)
   let [userDB, setUserDB] = useState('')
   let [listDB, setListDB] = useState(null)
+  let [windowAddress, setWindowAddress] = useState(null)
 
   //user-specific states
   let [userListDB, setUserListDB] = useState(null)
@@ -51,12 +56,12 @@ function App() {
       setListDB(rData)
       console.log(listDB)
     }
-
-
     fetchUserDB()
     fetchListDB()
     //screen size
     setThinScreen(thinScreenBool)
+    setWindowAddress(window.location.href)
+    console.log(windowAddress)
   },[thinScreenBool, user])
 
 
@@ -77,7 +82,7 @@ function App() {
           }>
           </Route>
         </Routes>
-        <Footer thinScreen={thinScreen}></Footer>
+        {windowAddress === clientURL? <Footer thinScreen={thinScreen}></Footer>: null}
       </Router>
     </div>
   );

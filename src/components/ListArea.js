@@ -43,7 +43,7 @@ const ListArea = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, set
     }
 
     const assignUserLists = async ()=>{
-        if(listDB !== null){
+        if(listDB !== null && user){
             let userListsArr = await listDB.filter(element => element.user_id === user.user_id)
             setUserListDB(userListsArr)
             console.log(userListDB)
@@ -66,7 +66,11 @@ const ListArea = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, set
                 sortedByDate.map((element, index)=>{
                     return(
                         <div>
-                            <Card onClick={()=>{setActiveList(element)}}>
+                            <Card onClick={()=>{setActiveList(element)}} sx={{
+                                marginBottom: "0.5em",
+                                boxShadow: "1px 1px 7px black",
+                                bgcolor: "#fefae0"
+                            }}>
                                 <h5 key={element.list_id}>{element.list_name}</h5>
                             </Card>
                         </div>
@@ -86,7 +90,8 @@ const ListArea = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, set
             <Paper elevation={2} sx={{
                 margin: '2%',
                 boxShadow: "5px 5px 20px black",
-                padding: "3%"
+                padding: "20% 3% 3%",
+                minHeight: "81vh",
             }}>
                 <h2>Your lists:</h2>
                 <Button variant="text" onClick={()=>{newListPage()}}sx={{
@@ -108,14 +113,15 @@ const ListArea = ({ thinScreen, user, userDB, listDB, setListDB, userListDB, set
         return(
             <Paper elevation={2} sx={{
                 margin: '2%',
-                boxShadow: "5px 5px 20px black"
+                boxShadow: "5px 5px 20px black",
+                padding: "20% 3% 3%"
             }}>
                 <h2>Sign in to manage your lists.</h2>
             </Paper>
         )
     }else if(activeList){
         return(
-            <ListColumn activeList={activeList}></ListColumn>
+            <ListColumn activeList={activeList} setActiveList={setActiveList}></ListColumn>
         )
     }
 

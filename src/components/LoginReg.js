@@ -105,7 +105,7 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                             marginTop: '0%', 
                             display: 'flex', 
                             flexDirection: 'column', 
-                            padding: '3%'
+                            padding: "15% 3% 3%",
                         }} className="ind-cards">
                             <h3>Log in here!</h3>
                             <TextField
@@ -197,14 +197,17 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
         return(
             <Paper elevation={2} sx={{
                 margin: '2%',
-                boxShadow: "5px 5px 20px black"
+                boxShadow: "5px 5px 20px black",
+                padding: "10% 3% 3%",
+                bgcolor: "#fefae0"
             }}>
                 <Card className="account-screen"sx={{
                     justifyContent: 'center', 
                     marginTop: '5%', 
                     display: 'flex', 
                     flexDirection: 'column', 
-                    padding: '5%'
+                    padding: '5%',
+                    boxShadow: "5px 5px 20px black"
                 }}>
                     <h3>Account information</h3>
                     <h6>Username: {user.username}</h6>
