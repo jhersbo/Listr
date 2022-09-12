@@ -1,3 +1,9 @@
+$tan: #fefae0;
+$leaf: #94D2BD;
+$bg-gradient: linear-gradient(180deg, rgba(156,156,164,1) 0%, rgba(43,45,66,1) 60%, rgba(46,0,40,1) 100%);
+$avatar-color: #003554;
+
+
 .hero{
     font-family: 'BhuTuka Expanded One', cursive;
     font-weight: 1000;
@@ -14,7 +20,7 @@
 }
 
 .account-screen > .ind-cards{
-    background-color: #fefae0;
+    background-color: $tan;
 }
 
 .submit{
@@ -29,8 +35,7 @@
 }
 
 .App{
-    background: rgb(156,156,164);
-    background: linear-gradient(180deg, rgba(156,156,164,1) 0%, rgba(43,45,66,1) 60%, rgba(46,0,40,1) 100%);
+    background: $bg-gradient;
     position: relative;
     min-height: 100vh;
 

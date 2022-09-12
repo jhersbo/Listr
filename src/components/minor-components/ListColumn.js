@@ -1,4 +1,4 @@
-import { Card, Paper, Button } from "@mui/material"
+import { Card, Paper, Button, TextField } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
@@ -7,20 +7,13 @@ import { useState } from "react";
 
 const ListColumn = ({ activeList, setActiveList })=>{
 
-    let [newItem, setNewItem] = useState(false)
+    let [addingIndex, setAddingIndex] = useState(null)
     let [newItemContent, setNewItemContent] = useState('')
+    
+    let parsedColumns = JSON.parse(activeList.list_arr)
 
     const renderColumn = ()=>{
-        
-        
-
-        const addItem = (target)=>{
-
-        }
-        
         if(activeList){
-            let parsedColumns = JSON.parse(activeList.list_arr)
-            console.log(parsedColumns)
             let mappedList = parsedColumns.map((element, index) =>{
                 let parsedItems = element.items
                 console.log(parsedItems)
@@ -33,21 +26,28 @@ const ListColumn = ({ activeList, setActiveList })=>{
                     }}>
                         <h4>{element.column_title}</h4>
                         <ListItems activeList={activeList} parsedItems={parsedItems}></ListItems>
+                        {addingIndex === index?
+                            <Card>
+                                <TextField></TextField>
+                                <Button>Save</Button>
+                            </Card>
+                        :
+                            null    
+                        }
                         <Button sx={{
-                            border: "1px solid #1d3557",
+                            border: "1px solid #003554",
                             borderRadius: "15%",
                             width: "20%",
                             alignSelf: "center",
                             bgcolor: "#94d2bd",
                             boxShadow: "1px 1px 5px black",
                             marginBottom: "0.5em"
-                        }}>
+                        }} onClick={()=>{setAddingIndex(index)}}>
                             <AddIcon fontSize="large" sx={{
-                                color: "#1d3557"
+                                color: "#003554"
                             }}></AddIcon>
                         </Button>
                     </Card>
-                    
                 )
             })
             return mappedList
