@@ -1,3 +1,5 @@
+import Cookies from "cookies-js";
+
 import ListColumn from "./minor-components/ListColumn";
 
 import { Card, Paper, Button } from "@mui/material";
@@ -5,44 +7,14 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useState, useEffect } from "react";
 // import Cookies from "cookies";
 
-const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userListDB, setUserListDB, noLists, setNoLists })=>{
-    // fake data generator
-    const getItems = (count, offset = 0) =>
-        Array.from({ length: count }, (v, k) => k).map(k => ({
-            id: `item-${k + offset}-${new Date().getTime()}`,
-            content: `item ${k + offset}`
-    }));
-    
-    //with react-beautiful-dnd
-    const reorder = (list, startIndex, endIndex)=>{
-        let result = Array.from(list)
-        let [removed] = result.splice(startIndex, 1)
-        result.splice(endIndex, 0, removed)
-    }
-
-    //one list to another
-    const move = (source, destination, droppableSource, droppableDestination)=>{
-        let sourceClone = Array.from(source)
-        let destClone = Array.from(destination)
-        let [removed] = sourceClone.splice(droppableSource.index, 1)
-        
-        destClone.splice(droppableDestination.index, 0, removed)
-
-        const result = {}
-        result[droppableSource.droppableId] = sourceClone
-        result[droppableDestination.droppableId] = destClone
-
-        return result;
-    }
-
-    //component states
-    let [activeList, setActiveList] = useState(null)
+const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userListDB, setUserListDB, noLists, setNoLists})=>{
     let [clearList, setClearList] = useState(false)
+    let [activeList, setActiveList] = useState(null)
 
-    // if(clearList){
-    //     ListColumn.render()
-    //     setClearList(true)
-    // }
+    const setActiveListPersistence = (element)=>{
+        Cookies.set('active', JSON.stringify(element))
+        setActiveList(element)
+    }
 
     const newListPage = ()=>{
         window.location.href = "/create"
@@ -52,7 +24,7 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
         if(listDB !== null && user){
             let userListsArr = await listDB.filter(element => element.user_id === user.user_id)
             setUserListDB(userListsArr)
-            console.log(userListDB)
+            // console.log(userListDB)
         }else{
             return
         }
@@ -72,7 +44,7 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
                 sortedByDate.map((element, index)=>{
                     return(
                         <div>
-                            <Card onClick={()=>{setActiveList(element)}} sx={{
+                            <Card onMouseDown={()=>{setActiveListPersistence(element)}} key={index} sx={{
                                 marginBottom: "0.5em",
                                 boxShadow: "1px 1px 7px black",
                                 bgcolor: "#fefae0"
@@ -99,17 +71,28 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
                 padding: "20% 3% 3%",
                 minHeight: "81vh",
             }}>
-                <h2>Your lists:</h2>
-                <Button variant="text" onClick={()=>{newListPage()}}sx={{
-                    color: "#94d2bd",
-                    fontFamily: "Antonio, sans-serif",
-                    textShadow: "-1px -1px 0 #22223b, 1px -1px 0 #22223b, -1px 1px 0 #22223b, 1px 1px 0 #22223b;",
-                    fontSize: "21px",
-                    width: "50%",
-                    padding: "0%",
-                    alignSelf: "center"
-                }}>New List                                
-                </Button>
+                <Card sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    border: "none",
+                    boxShadow: "none"
+                }}>
+                    <h2>Your lists:</h2>
+                    <Button variant="text" onClick={()=>{newListPage()}}sx={{
+                        color: "#94d2bd",
+                        fontFamily: "Antonio, sans-serif",
+                        // textShadow: "-1px -1px 0 #003554b, 1px -1px 0 #003554b, -1px 1px 0 #003554b, 1px 1px 0 #003554b;",
+                        fontSize: "21px",
+                        width: "50%",
+                        padding: "0%",
+                        margin: "2%",
+                        alignSelf: "center",
+                        border: "1px solid #003554",
+                        bgcolor: "#003554",
+                        boxShadow: "1px 1px 5px black"
+                    }}>New List                                
+                    </Button>
+                </Card>
                 <Paper>
                     {renderLists()}
                 </Paper>

@@ -1,3 +1,5 @@
+import Cookies from "cookies-js";
+
 import { Card, Paper, Button, TextField } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -14,18 +16,22 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
     let [newItemContent, setNewItemContent] = useState('')
     let [parsedColumns, setParsedColumns] = useState(JSON.parse(activeList.list_arr))
 
+    const unsetActiveListPersistence = (element)=>{
+        Cookies.set('active', element)
+        setActiveList(element)
+    }
+
     console.log(parsedColumns)
 
-    const saveNewItem = async (element)=>{
+    const saveNewListVersion = async (element)=>{
         let newList = element.items.concat({
             id: `item-${new Date().getTime()}`,
             content: newItemContent,
             notes: null
         })
         parsedColumns[addingIndex].items = newList
-        //this works in adding to the list. Just need to persist changes now
-        console.log(newList)
-        console.log(parsedColumns)
+        // console.log(newList)
+        // console.log(parsedColumns)
         //this fetch request is timing out. the one on Postman also does.
         
         await fetch(serverURL + "lists", {
@@ -73,7 +79,7 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
                         flexDirection: "column"
                     }}>
                         <h4>{element.column_title}</h4>
-                        <ListItems activeList={activeList} setActiveList={setActiveList}parsedItems={parsedItems} clearList={clearList} setClearList={setClearList}></ListItems>
+                        <ListItems activeList={activeList} setActiveList={setActiveList}parsedItems={parsedItems} clearList={clearList} setClearList={setClearList} ></ListItems>
 
                         {addingIndex === index?
                             <Card sx={{
@@ -87,7 +93,7 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
                                     margin: "0.5em",
                                     boxShadow: "1px 1px 7px black"
                                 }} onChange={(e)=>{setNewItemContent(e.target.value)}}></TextField>
-                                <Button onClick={async ()=>{await saveNewItem(element)}}>Save</Button>
+                                <Button onClick={async ()=>{await saveNewListVersion(element)}}>Save</Button>
                             </Card>
                         :
                             null    
@@ -120,7 +126,7 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
             padding: "20% 3% 3%",
             bgcolor: "#fefae0"
         }}>
-             <ArrowBackIosNewIcon onClick={()=>{setActiveList(null)}}></ArrowBackIosNewIcon>
+             <ArrowBackIosNewIcon onClick={()=>{unsetActiveListPersistence(null)}}></ArrowBackIosNewIcon>
             <h3>{activeList.list_name}</h3>
             {renderColumn()}
         </Paper>
