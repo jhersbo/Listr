@@ -4,9 +4,9 @@ import Cookies from 'cookies-js'
 import { Card, Paper, TextField, Button } from "@mui/material"
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
-import { fontSize } from "@mui/system"
+import { fontSize, padding } from "@mui/system"
 
-const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
+const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen, setActiveList})=>{
     
     let [username, setUsername] = useState(user? user.username: '')
     let [password, setPassword] = useState(user? user.password: '')
@@ -22,6 +22,10 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
         color: 'black',
         fontFamily: "Combo, cursive",
         fontSize: "18px"
+    }
+
+    const textFieldStyle = {
+        marginBottom: "2%"
     }
     
     async function handleLogin(){
@@ -55,6 +59,8 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
     const handleLogout = ()=>{
         setUser(undefined)
         Cookies.set('user', undefined)
+        Cookies.set('active', '')
+        setActiveList('')
     }
 
     function generateUserId(min, max) {
@@ -97,10 +103,14 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
         return(
             <Paper elevation={2} sx={{
                 margin: '2%',
-                boxShadow: "5px 5px 20px black"
+                boxShadow: "5px 5px 20px black",
+                padding: "10% 3% 3%",
+                bgcolor: "#fefae0"
             }}>
                 {!newUser?
-                    <Card className="account-screen">
+                    <Card className="account-screen" sx={{
+                        boxShadow: "5px 5px 20px black"
+                    }}>
                         <Card sx={{
                             justifyContent: 'center', 
                             marginTop: '0%', 
@@ -113,12 +123,14 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                             required
                             id="outlined-required"
                             label="Username"
+                            sx={textFieldStyle}
                             onChange={(e)=>{setUsername(e.target.value)}}
                             />
                             <TextField
                             required
                             id="outlined-required"
                             label="Password"
+                            sx={textFieldStyle}
                             onChange={(e)=>{setPassword(e.target.value)}}
                             />
                             <Button className="submit" variant="contained" onClick={async()=>{await handleLogin()}} sx={buttonStyle}>Login</Button>
@@ -136,9 +148,10 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                                 fontFamily: "Antonio, sans-serif",
                                 textShadow: "-1px -1px 0 #22223b, 1px -1px 0 #22223b, -1px 1px 0 #22223b, 1px 1px 0 #22223b;",
                                 fontSize: "21px",
-                                width: "50%",
+                                width: "60%",
                                 padding: "0%",
-                                alignSelf: "center"
+                                alignSelf: "center",
+                                margin: "3%"
                             }}>
                                 <KeyboardDoubleArrowRightIcon></KeyboardDoubleArrowRightIcon>
                                 Register Here!
@@ -147,7 +160,9 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                         </Card>
                     </Card>
                     :
-                    <Card className="account-screen">
+                    <Card className="account-screen" sx={{
+                        boxShadow: "5px 5px 20px black"
+                    }}>
                         <Card sx={{
                             justifyContent: 'center', 
                             marginTop: '5%', 
@@ -160,24 +175,28 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen })=>{
                             required
                             id="outlined-required"
                             label="Legal Name"
+                            sx={textFieldStyle}
                             onChange={(e)=>{setName(e.target.value)}}
                             />
                             <TextField
                             required
                             id="outlined-required"
                             label="Username"
+                            sx={textFieldStyle}
                             onChange={(e)=>{setUsername(e.target.value)}}
                             />
                             <TextField
                             required
                             id="outlined-required"
                             label="Password"
+                            sx={textFieldStyle}
                             onChange={(e)=>{setPassword(e.target.value)}}
                             />
                             <TextField
                             required
                             id="outlined-required"
                             label="Confirm Password"
+                            sx={textFieldStyle}
                             onChange={(e)=>{setPasswordCON(e.target.value)}}
                             />
                             <Button className="submit" variant="contained" onClick={async ()=>{await handleRegistration()}} sx={buttonStyle}>Register</Button>

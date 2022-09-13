@@ -17,10 +17,7 @@ $avatar-color: #003554;
 .account-screen{
     font-family: 'Combo', cursive;
     font-size: 28px;
-}
-
-.account-screen > .ind-cards{
-    background-color: $tan;
+    box-shadow: 5px 5px 20px black;
 }
 
 .submit{

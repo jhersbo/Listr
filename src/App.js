@@ -85,11 +85,10 @@ function App() {
             <CreateList></CreateList>
           }></Route>
           <Route path='/user' element={
-          <LoginReg thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} setUserDB={setUserDB}></LoginReg>
+          <LoginReg thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} setUserDB={setUserDB} activeList={activeList} setActiveList={setActiveList}></LoginReg>
           }>
           </Route>
         </Routes>
-        {/* {windowAddress === clientURL? <Footer thinScreen={thinScreen}></Footer>: null} */}
       </Router>
     </div>
   );
