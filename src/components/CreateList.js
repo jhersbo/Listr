@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-import { Paper, Card, Button } from "@mui/material"
+import { Paper, Card, Button, TextField } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
@@ -68,16 +68,26 @@ const CreateList = ({ user })=>{
                     bgcolor: "#fefae0",
                     boxShadow: 'none'
                 }}>
-                    <h3>Create your list</h3>
+                    <h2>Create your list:</h2>
+                    <TextField label="Name your list!" sx={{
+                        bgcolor: 'white'
+                    }} onChange={(e)=>{setlistName(e.target.value)}}></TextField>
                     <Card sx={{
                         display: 'flex',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        bgcolor: "#fefae0",
                     }}>
                         <Button>
-                            <AddIcon></AddIcon>
+                            <AddIcon sx={{
+                                color: '#003554',
+                                fontSize: 35
+                            }}></AddIcon>
                         </Button>
                         <Button>
-                            <RemoveIcon></RemoveIcon>
+                            <RemoveIcon sx={{
+                                color: '#003554',
+                                fontSize: 35
+                            }}></RemoveIcon>
                         </Button>
                     </Card>   
                 </Card>
