@@ -42,7 +42,7 @@ function App() {
   let [windowAddress, setWindowAddress] = useState(null)
 
   //user-specific states
-  let [userListDB, setUserListDB] = useState(null)
+  let [userListDB, setUserListDB] = useState('')
   let [noLists, setNoLists] = useState(false)
   
   

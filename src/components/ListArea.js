@@ -1,15 +1,23 @@
 import Cookies from "cookies-js";
 
+
 import ListColumn from "./minor-components/ListColumn";
 
-import { Card, Paper, Button } from "@mui/material";
+import { Card, Paper, Button, TextField } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useState, useEffect } from "react";
+
+//server URL
+const serverURL = "http://localhost:3000/"
 
 const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userListDB, setUserListDB, noLists, setNoLists, activeList, setActiveList })=>{
     
     
     let [clearList, setClearList] = useState(false)
+
+    let [newListName, setNewListName] = useState('')
+    let [editingListName, setEditingListName] = useState([false, null])
 
     const setActiveListPersistence = (element)=>{
         console.log(element)
@@ -32,6 +40,45 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
         //having issues setting the no list state. It will set the "no list" state if the API call takes too long, but will correct once the listDB variable is set. Maybe try .then in useEffect?
     }
 
+    const handleListNameEdits = (index)=>{
+        setEditingListName([true, index])
+    }
+
+    const handleListNameSave = async (index)=>{
+        
+        userListDB[index].list_name = newListName
+
+        await fetch(serverURL + "lists", {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                list_id: userListDB[index].list_id
+            })
+        })
+        
+        
+        let response = await fetch(serverURL + "lists" , {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                list_id: userListDB[index].list_id,
+                list_name: userListDB[index].list_name, 
+                list_arr: userListDB[index].list_arr,
+                date_created: new Date(),
+                user_id: user.user_id
+            })
+        })
+        console.log("Response changing list name:")
+        console.log(response)
+        
+        
+        setEditingListName([false, null])
+    }
+
     useEffect(()=>{
         assignUserLists()
     }, [user, userDB, listDB])
@@ -51,8 +98,56 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
                                 bgcolor: "#fefae0",
                                 display: "flex",
                                 justifyContent: "space-between"
-                            }} onClick={()=>{setActiveListPersistence(element)}}>
-                                <h5 key={element.list_id}>{element.list_name}</h5>
+                            }}>
+                                <h5 key={element.list_id} className='list-names' onClick={()=>{setActiveListPersistence(element)}}>{element.list_name}</h5>
+                                {!editingListName[0]?
+                                    <Button onClick={()=>{handleListNameEdits(index)}}>
+                                        <EditIcon sx={{
+                                        padding: "none",
+                                        color: "#003554"
+                                        }}></EditIcon>
+                                    </Button>
+                                :
+                                    <Card sx={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        alignItems: "center",
+                                        bgcolor: "#fefae0",
+                                        border: "none",
+                                        boxShadow: "none" 
+                                    }}>
+                                        {editingListName[1] === index?
+                                            <Card sx={{
+                                                display: "flex",
+                                                justifyContent: "space-between",
+                                                alignItems: "center",
+                                                bgcolor: "#fefae0",
+                                                border: "none",
+                                                boxShadow: "none"
+                                            }}>
+                                                <TextField label="Enter new list name." sx={{
+                                                    bgcolor: "white",
+                                                    margin: "2%"
+                                                }} onChange={(e)=>{setNewListName(e.target.value)}}></TextField>
+                                                <Button sx={{
+                                                    color: "#94d2bd",
+                                                    fontFamily: "Antonio, sans-serif",
+                                                    // textShadow: "-1px -1px 0 #003554b, 1px -1px 0 #003554b, -1px 1px 0 #003554b, 1px 1px 0 #003554b;",
+                                                    fontSize: "21px",
+                                                    width: "20%",
+                                                    padding: "0%",
+                                                    margin: "2%",
+                                                    alignSelf: "center",
+                                                    border: "1px solid #003554",
+                                                    bgcolor: "#003554",
+                                                    boxShadow: "1px 1px 5px black"
+                                                }} onClick={async ()=>{await handleListNameSave(index)}}>Save</Button>
+                                            </Card>
+                                        :
+                                            null
+                                        }
+                                    </Card>
+                                }
                             </Card> 
                         </div>
                     )

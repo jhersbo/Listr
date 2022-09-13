@@ -94,7 +94,19 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
                                     margin: "0.5em",
                                     boxShadow: "1px 1px 7px black"
                                 }} onChange={(e)=>{setNewItemContent(e.target.value)}}></TextField>
-                                <Button onClick={async ()=>{await saveNewListVersion(element)}}>Save</Button>
+                                <Button onClick={async ()=>{await saveNewListVersion(element)}} sx={{
+                                    color: "#94d2bd",
+                                    fontFamily: "Antonio, sans-serif",
+                                    // textShadow: "-1px -1px 0 #003554b, 1px -1px 0 #003554b, -1px 1px 0 #003554b, 1px 1px 0 #003554b;",
+                                    fontSize: "21px",
+                                    width: "50%",
+                                    padding: "0%",
+                                    margin: "2%",
+                                    alignSelf: "center",
+                                    border: "1px solid #003554",
+                                    bgcolor: "#003554",
+                                    boxShadow: "1px 1px 5px black"
+                                }}>Save</Button>
                             </Card>
                         :
                             null    

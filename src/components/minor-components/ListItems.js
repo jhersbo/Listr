@@ -1,10 +1,18 @@
 import Cookies from "cookies-js";
 import { Card, Button } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useState } from "react";
 
 const serverURL = "http://localhost:3000/"
 
 const ListItem = ({ parsedItems, activeList, setActiveList, parsedColumns, setParsedColumns, columnIndex, user })=>{
+
+    let [update, setUpdate ] = useState(false)
+
+    //governs rerendering. switches state back and forth on each user input
+    if(update){
+        setUpdate(false)
+    }
 
     const deleteItem = async (index)=>{
         let removed = parsedItems.splice(index, 1)
@@ -43,6 +51,7 @@ const ListItem = ({ parsedItems, activeList, setActiveList, parsedColumns, setPa
         setParsedColumns(parsedColumns)
         setActiveList(activeList)
         Cookies.set('active', JSON.stringify(activeList))
+        setUpdate(true)
     }
     
     const renderList = ()=>{
