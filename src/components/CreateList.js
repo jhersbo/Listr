@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 
 import { Paper, Card, Button, TextField } from "@mui/material"
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
@@ -68,9 +69,10 @@ const CreateList = ({ user })=>{
                     bgcolor: "#fefae0",
                     boxShadow: 'none'
                 }}>
+                    <ArrowBackIosNewIcon onClick={()=>{window.location.href = '/'}}></ArrowBackIosNewIcon>
                     <h2>Create your list:</h2>
                     <TextField label="Name your list!" sx={{
-                        bgcolor: 'white'
+                        bgcolor: 'white',
                     }} onChange={(e)=>{setlistName(e.target.value)}}></TextField>
                     <Card sx={{
                         display: 'flex',
