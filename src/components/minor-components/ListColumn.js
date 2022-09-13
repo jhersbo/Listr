@@ -58,12 +58,11 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
                 user_id: user.user_id
             })
         })
+        console.log("Response from adding an item:")
         console.log(response)
         Cookies.set('active', JSON.stringify({...activeList, list_arr: JSON.stringify(parsedColumns)}))
         setAddingIndex(null)
         setClearList(true)
-        //have to get it to render without refresh
-        //add delete buttons
     }
 
     const renderColumn = ()=>{
@@ -71,6 +70,7 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
             // console.log(activeList)
             let mappedList = parsedColumns.map((element, index) =>{
                 let parsedItems = element.items
+                let columnIndex = index
                 // console.log(parsedItems)
                 return(
                     <Card key={index} className="scroll-box" sx={{
@@ -80,7 +80,7 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
                         flexDirection: "column"
                     }}>
                         <h4>{element.column_title}</h4>
-                        <ListItems activeList={activeList} setActiveList={setActiveList}parsedItems={parsedItems} clearList={clearList} setClearList={setClearList} ></ListItems>
+                        <ListItems activeList={activeList} setActiveList={setActiveList}parsedItems={parsedItems} clearList={clearList} setClearList={setClearList} parsedColumns={parsedColumns} setParsedColumns={setParsedColumns} columnIndex={columnIndex} user={user}></ListItems>
 
                         {addingIndex === index?
                             <Card sx={{

@@ -26,6 +26,14 @@ function App() {
     cookieUser = JSON.parse(cookieUser)
   }
 
+  // Cookies.expire('active')
+  
+  let cookieActiveList = Cookies.get('active')
+  if(cookieActiveList){
+      cookieActiveList = JSON.parse(cookieActiveList)
+  }
+  let [activeList, setActiveList] = useState(cookieActiveList)
+
   //app-wide state variables
   let [thinScreen, setThinScreen] = useState(false)
   let [user, setUser] = useState(cookieUser)
@@ -60,15 +68,7 @@ function App() {
     //screen size
     setThinScreen(thinScreenBool)
     setWindowAddress(window.location.href)
-  },[thinScreenBool, user])
-
-  // Cookies.expire('active')
-    
-  let cookieActiveList = Cookies.get('active')
-  if(cookieActiveList){
-      cookieActiveList = JSON.parse(cookieActiveList)
-  }
-  let [activeList, setActiveList] = useState(cookieActiveList)
+  },[thinScreenBool, user, activeList])
 
 
   
