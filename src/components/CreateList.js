@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 
 import { Paper, Card, Button } from "@mui/material"
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 //server URL
 const serverURL = "http://localhost:3000/"
@@ -10,9 +12,6 @@ const CreateList = ({ user })=>{
     let [listName, setlistName] = useState('')
     let [listColumns, setListColumns] = useState([])
 
-
-
-    
     const createListRequest = async ()=>{
         
         function generateListId(min, max) {
@@ -52,15 +51,49 @@ const CreateList = ({ user })=>{
     }
     
     return(
-        <Paper sx={{
+        <Paper elevation={24} sx={{
             margin: '2%',
             boxShadow: "5px 5px 20px black",
             padding: "20% 3% 3%",
             minHeight: "81vh",
+            bgcolor: "#fefae0"
         }}>
-            <Card>
-                <h3>Create your list</h3>
-                <Button onClick={async()=>{await createListRequest()}}>Create</Button>
+            <Card sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    bgcolor: "#fefae0",
+                    boxShadow: 'none'
+                }}>
+                <Card sx={{
+                    bgcolor: "#fefae0",
+                    boxShadow: 'none'
+                }}>
+                    <h3>Create your list</h3>
+                    <Card sx={{
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}>
+                        <Button>
+                            <AddIcon></AddIcon>
+                        </Button>
+                        <Button>
+                            <RemoveIcon></RemoveIcon>
+                        </Button>
+                    </Card>   
+                </Card>
+                <Button onClick={async()=>{await createListRequest()}} sx={{
+                        color: "#94d2bd",
+                        fontFamily: "Antonio, sans-serif",
+                        // textShadow: "-1px -1px 0 #003554b, 1px -1px 0 #003554b, -1px 1px 0 #003554b, 1px 1px 0 #003554b;",
+                        fontSize: "21px",
+                        width: "50%",
+                        padding: "0%",
+                        margin: "2%",
+                        alignSelf: "center",
+                        border: "1px solid #003554",
+                        bgcolor: "#003554",
+                        boxShadow: "1px 1px 5px black"
+                    }}>Create</Button>
             </Card>
         </Paper>
     )
