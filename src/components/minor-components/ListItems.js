@@ -13,9 +13,6 @@ const ListItem = ({ parsedItems, activeList, setActiveList, parsedColumns, setPa
 
         parsedColumns[columnIndex].items = parsedItems
         activeList.list_arr = JSON.stringify(parsedColumns)
-        setParsedColumns(parsedColumns)
-        setActiveList(activeList)
-        Cookies.set('active', JSON.stringify(activeList))
         
         //update DB list
         await fetch(serverURL + "lists", {
@@ -43,6 +40,9 @@ const ListItem = ({ parsedItems, activeList, setActiveList, parsedColumns, setPa
         })
         console.log("Response from deletion of an item:")
         console.log(response)
+        setParsedColumns(parsedColumns)
+        setActiveList(activeList)
+        Cookies.set('active', JSON.stringify(activeList))
     }
     
     const renderList = ()=>{
