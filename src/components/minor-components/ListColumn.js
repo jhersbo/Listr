@@ -59,6 +59,7 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
             })
         })
         console.log(response)
+        Cookies.set('active', JSON.stringify({...activeList, list_arr: JSON.stringify(parsedColumns)}))
         setAddingIndex(null)
         setClearList(true)
         //have to get it to render without refresh
