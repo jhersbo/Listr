@@ -2,6 +2,7 @@ import { useState } from "react"
 import Cookies from 'cookies-js'
 
 import { Card, Paper, TextField, Button } from "@mui/material"
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import { fontSize, padding } from "@mui/system"
@@ -229,6 +230,9 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen, setActiveList}
                     padding: '5%',
                     boxShadow: "5px 5px 20px black"
                 }}>
+                    <ArrowBackIosNewIcon onClick={()=>{window.location.href = '/'}} sx={{
+                        marginTop: "3%",
+                    }}></ArrowBackIosNewIcon>
                     <h3>Account information</h3>
                     <h6>Username: {user.username}</h6>
                     <h6>Name: {user.name}</h6>

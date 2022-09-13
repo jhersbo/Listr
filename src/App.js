@@ -82,7 +82,7 @@ function App() {
             }>
           </Route>
           <Route path='/create' element={
-            <CreateList></CreateList>
+            <CreateList user={user}></CreateList>
           }></Route>
           <Route path='/user' element={
           <LoginReg thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} setUserDB={setUserDB} activeList={activeList} setActiveList={setActiveList}></LoginReg>
