@@ -8,7 +8,7 @@ const serverURL = "http://localhost:3000/"
 const CreateList = ({ user })=>{
 
     let [listName, setlistName] = useState('')
-    let [listColumns, setListColumns] = useState(['Food', 'Produce'])
+    let [listColumns, setListColumns] = useState([])
 
 
 
