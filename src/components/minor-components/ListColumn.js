@@ -16,9 +16,9 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
     let [newItemContent, setNewItemContent] = useState('')
     let [parsedColumns, setParsedColumns] = useState(JSON.parse(activeList.list_arr))
 
-    const unsetActiveListPersistence = (element)=>{
-        Cookies.set('active', element)
-        setActiveList(element)
+    const unsetActiveListPersistence = ()=>{
+        Cookies.set('active', '')
+        setActiveList('')
     }
 
     console.log(parsedColumns)

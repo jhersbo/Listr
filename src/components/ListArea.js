@@ -5,15 +5,16 @@ import ListColumn from "./minor-components/ListColumn";
 import { Card, Paper, Button } from "@mui/material";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useState, useEffect } from "react";
-// import Cookies from "cookies";
 
-const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userListDB, setUserListDB, noLists, setNoLists})=>{
+const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userListDB, setUserListDB, noLists, setNoLists, activeList, setActiveList })=>{
+    
+    
     let [clearList, setClearList] = useState(false)
-    let [activeList, setActiveList] = useState(null)
 
     const setActiveListPersistence = (element)=>{
-        Cookies.set('active', JSON.stringify(element))
+        console.log(element)
         setActiveList(element)
+        Cookies.set('active', JSON.stringify(element))
     }
 
     const newListPage = ()=>{
@@ -44,13 +45,15 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
                 sortedByDate.map((element, index)=>{
                     return(
                         <div>
-                            <Card onMouseDown={()=>{setActiveListPersistence(element)}} key={index} sx={{
+                            <Card key={index} sx={{
                                 marginBottom: "0.5em",
                                 boxShadow: "1px 1px 7px black",
-                                bgcolor: "#fefae0"
-                            }}>
+                                bgcolor: "#fefae0",
+                                display: "flex",
+                                justifyContent: "space-between"
+                            }} onClick={()=>{setActiveListPersistence(element)}}>
                                 <h5 key={element.list_id}>{element.list_name}</h5>
-                            </Card>
+                            </Card> 
                         </div>
                     )
                 })
@@ -108,7 +111,7 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
                 <h2>Sign in to manage your lists.</h2>
             </Paper>
         )
-    }else if(activeList){
+    }else if(activeList && listDB){
         return(
             <ListColumn activeList={activeList} setActiveList={setActiveList} user={user} setUser={setUser} userListDB={userListDB} setUserListDB={setUserListDB} listDB={listDB} setListDB={setListDB} clearList={clearList} setClearList={setClearList}></ListColumn>
         )

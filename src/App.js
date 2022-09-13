@@ -62,14 +62,23 @@ function App() {
     setWindowAddress(window.location.href)
   },[thinScreenBool, user])
 
+  // Cookies.expire('active')
+    
+  let cookieActiveList = Cookies.get('active')
+  if(cookieActiveList){
+      cookieActiveList = JSON.parse(cookieActiveList)
+  }
+  let [activeList, setActiveList] = useState(cookieActiveList)
 
+
+  
   return (
     <div className="App">
       <Router>
         <HeroNav thinScreen={thinScreen} user={user} setUser={setUser}></HeroNav>
         <Routes>
           <Route path='/' element={
-            <ListArea thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} listDB={listDB} setListDB={setListDB} userListDB={userListDB} setUserListDB={setUserListDB} noLists={noLists} setNoLists={setNoLists}></ListArea>
+            <ListArea thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} listDB={listDB} setListDB={setListDB} userListDB={userListDB} setUserListDB={setUserListDB} noLists={noLists} setNoLists={setNoLists} activeList={activeList} setActiveList={setActiveList}></ListArea>
             }>
           </Route>
           <Route path='/create' element={
@@ -84,6 +93,7 @@ function App() {
       </Router>
     </div>
   );
+  
 }
 
 export default App;
