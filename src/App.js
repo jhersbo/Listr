@@ -13,7 +13,7 @@ import HeroNav from './components/HeroNav';
 import CreateList from './components/CreateList';
 
 //server URL
-const serverURL = "http://localhost:3000/"
+const serverURL = "https://listr-server.herokuapp.com/"
 
 //local address
 const clientURL = "http://localhost:3001/"

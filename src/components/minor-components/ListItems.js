@@ -3,7 +3,7 @@ import { Card, Button } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from "react";
 
-const serverURL = "http://localhost:3000/"
+const serverURL = "https://listr-server.herokuapp.com/"
 
 const ListItem = ({ parsedItems, activeList, setActiveList, parsedColumns, setParsedColumns, columnIndex, user })=>{
 

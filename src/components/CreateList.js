@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 //server URL
-const serverURL = "http://localhost:3000/"
+const serverURL = "https://listr-server.herokuapp.com/"
 
 const CreateList = ({ user })=>{
 

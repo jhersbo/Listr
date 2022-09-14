@@ -12,7 +12,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useState, useEffect } from "react";
 
 //server URL
-const serverURL = "http://localhost:3000/"
+const serverURL = "https://listr-server.herokuapp.com/"
 
 const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, noLists, setNoLists, activeList, setActiveList })=>{
     

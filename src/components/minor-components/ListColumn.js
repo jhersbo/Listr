@@ -10,7 +10,7 @@ import { useState } from "react";
 const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListDB, clearList, setClearList })=>{
 
     //server URL
-    const serverURL = "http://localhost:3000/"
+    const serverURL = "https://listr-server.herokuapp.com/"
 
     let [addingIndex, setAddingIndex] = useState(null)
     let [newItemContent, setNewItemContent] = useState('')

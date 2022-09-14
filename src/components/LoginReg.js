@@ -16,7 +16,7 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen, setActiveList}
     let [name, setName] = useState(user? user.name: '')
     let [newUser, setNewUser] = useState(false)
     
-    const serverURL = "http://localhost:3000/"
+    const serverURL = "https://listr-server.herokuapp.com/"
 
     const buttonStyle = {
         marginTop: '2%',
