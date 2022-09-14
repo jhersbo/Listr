@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useRef, useEffect } from "react"
 
 import { Paper, Card, Button, TextField } from "@mui/material"
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -12,9 +12,46 @@ const CreateList = ({ user })=>{
 
     let [listName, setlistName] = useState('')
     let [listColumns, setListColumns] = useState([])
+    let [numberColumns, setNumberColumns] = useState([])
+    let [tempColName, setTempColName] = useState('')
+    // let [colIndex, setColIndex] = useRef(null)
+    let [rr, setRR] = useState(false)
+
+    if(rr){
+        setRR(false)
+    }
+
+    // const setColumnNames = (value, index)=>{
+    //     setListColumns([...listColumns, listColumns[index] = value])
+    // }
+
+    const renderColumnInputs = ()=>{
+        let mappedState = numberColumns.map((element, index)=>{
+            // setColIndex(index)
+            return(
+                <Card>
+                    <TextField label={"Name your column!"} onChange={(e)=>{setTempColName(e.target.value)}}>
+                    </TextField>
+                    <Button onClick={()=>{setListColumns([...listColumns, tempColName])}}>Save</Button>
+                </Card>
+            )
+        })
+        return mappedState
+    }
+    
+    //column names wont save START HERE
+    const incrementColumns = (direction, value)=>{
+        if(direction === 'up'){
+            setNumberColumns([...numberColumns, ''])
+        }
+        if(direction === 'down'){
+            setNumberColumns(numberColumns.slice(1))
+            listColumns.pop()
+            setListColumns(listColumns)
+        }
+    }
 
     const createListRequest = async ()=>{
-        
         function generateListId(min, max) {
             min = Math.ceil(min);
             max = Math.floor(max);
@@ -22,6 +59,7 @@ const CreateList = ({ user })=>{
         }
 
         let packageColumnData = ()=>{
+            
             let mappedArr = listColumns.map((element, index)=>{
                 let dataPacket = {
                     column_title: element,
@@ -49,6 +87,7 @@ const CreateList = ({ user })=>{
         })
         console.log("Response for creating a new list:")
         console.log(response)
+        window.location.href = '/'
     }
     
     return(
@@ -74,18 +113,29 @@ const CreateList = ({ user })=>{
                     <TextField label="Name your list!" sx={{
                         bgcolor: 'white',
                     }} onChange={(e)=>{setlistName(e.target.value)}}></TextField>
+                    {listColumns? 
+                        <Card>
+                            {renderColumnInputs()}
+                        </Card>
+                    :
+                        null
+                    }
                     <Card sx={{
                         display: 'flex',
                         justifyContent: 'center',
                         bgcolor: "#fefae0",
                     }}>
-                        <Button>
+                        <Button onClick={()=>{incrementColumns('up', tempColName)}} sx={{
+                            marginBottom: "3%"
+                        }}>
                             <AddIcon sx={{
                                 color: '#003554',
-                                fontSize: 35
+                                fontSize: 35,
                             }}></AddIcon>
                         </Button>
-                        <Button>
+                        <Button onClick={()=>{incrementColumns('down')}} sx={{
+                            marginBottom: "3%"
+                        }}>
                             <RemoveIcon sx={{
                                 color: '#003554',
                                 fontSize: 35
