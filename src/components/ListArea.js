@@ -5,6 +5,7 @@ import ListColumn from "./minor-components/ListColumn";
 
 import { Card, Paper, Button, TextField } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useState, useEffect } from "react";
 
@@ -18,6 +19,11 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
 
     let [newListName, setNewListName] = useState('')
     let [editingListName, setEditingListName] = useState([false, null])
+    let [deleting, setDeleting] = useState(false)
+
+    if(deleting){
+        setDeleting(false)
+    }
 
     const setActiveListPersistence = (element)=>{
         console.log(element)
@@ -42,6 +48,22 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
 
     const handleListNameEdits = (index)=>{
         setEditingListName([true, index])
+    }
+
+    //need to make it rerender on delete
+    const handleDeleteList = async (index)=>{
+        setDeleting(true)
+        let response =  await fetch(serverURL + "lists", {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                list_id: userListDB[index].list_id
+            })
+        })
+        console.log(response)
+        setDeleting(false)
     }
 
     const handleListNameSave = async (index)=>{
@@ -101,12 +123,28 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
                             }}>
                                 <h5 key={element.list_id} className='list-names' onClick={()=>{setActiveListPersistence(element)}}>{element.list_name}</h5>
                                 {!editingListName[0]?
-                                    <Button onClick={()=>{handleListNameEdits(index)}}>
-                                        <EditIcon sx={{
-                                        padding: "none",
-                                        color: "#003554"
-                                        }}></EditIcon>
-                                    </Button>
+                                    <Card sx={{
+                                        display: "flex",
+                                        justifyContent: "space-around",
+                                        alignItems: "center",
+                                        bgcolor: "#fefae0",
+                                        border: "none",
+                                        boxShadow: "none"
+                                    }}>
+                                        <Button onClick={()=>{handleListNameEdits(index)}}>
+                                            <EditIcon sx={{
+                                                padding: "none",
+                                                color: "#003554"
+                                            }}></EditIcon>
+                                        </Button>
+                                        <Button onClick={()=>{handleDeleteList(index)}}>
+                                            <DeleteIcon sx={{
+                                                padding: "none",
+                                                color: "#d62828",
+                                                // textShadow: "1px 1px #003554"
+                                            }}></DeleteIcon>
+                                        </Button>
+                                    </Card>
                                 :
                                     <Card sx={{
                                         display: "flex",

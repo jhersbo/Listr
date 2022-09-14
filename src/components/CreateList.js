@@ -38,7 +38,7 @@ const CreateList = ({ user })=>{
         })
         return mappedState
     }
-    
+
     //column names wont save START HERE
     const incrementColumns = (direction, value)=>{
         if(direction === 'up'){
@@ -59,7 +59,6 @@ const CreateList = ({ user })=>{
         }
 
         let packageColumnData = ()=>{
-            
             let mappedArr = listColumns.map((element, index)=>{
                 let dataPacket = {
                     column_title: element,
