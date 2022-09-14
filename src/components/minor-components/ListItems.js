@@ -33,7 +33,7 @@ const ListItem = ({ parsedItems, activeList, setActiveList, parsedColumns, setPa
             })
         })
         
-        let response = await fetch(serverURL + "lists" , {
+        await fetch(serverURL + "lists" , {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -47,7 +47,6 @@ const ListItem = ({ parsedItems, activeList, setActiveList, parsedColumns, setPa
             })
         })
         console.log("Response from deletion of an item:")
-        console.log(response)
         setParsedColumns(parsedColumns)
         setActiveList(activeList)
         Cookies.set('active', JSON.stringify(activeList))

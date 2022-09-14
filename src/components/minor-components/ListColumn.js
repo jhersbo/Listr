@@ -21,8 +21,6 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
         setActiveList('')
     }
 
-    console.log(parsedColumns)
-
     const saveNewListVersion = async (element)=>{
         let newList = element.items.concat({
             id: `item-${new Date().getTime()}`,
@@ -30,10 +28,7 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
             notes: null
         })
         parsedColumns[addingIndex].items = newList
-        // console.log(newList)
-        // console.log(parsedColumns)
-        //this fetch request is timing out. the one on Postman also does.
-        
+
         await fetch(serverURL + "lists", {
             method: "DELETE",
             headers: {
@@ -58,8 +53,6 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
                 user_id: user.user_id
             })
         })
-        console.log("Response from adding an item:")
-        console.log(response)
         Cookies.set('active', JSON.stringify({...activeList, list_arr: JSON.stringify(parsedColumns)}))
         setAddingIndex(null)
         setClearList(true)
@@ -140,7 +133,7 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
             bgcolor: "#fefae0"
         }}>
              <ArrowBackIosNewIcon onClick={()=>{unsetActiveListPersistence(null)}}></ArrowBackIosNewIcon>
-            <h3>{activeList.list_name}</h3>
+            <h2>{activeList.list_name}</h2>
             {renderColumn()}
         </Paper>
     )

@@ -2,6 +2,8 @@ import Cookies from "cookies-js";
 
 
 import ListColumn from "./minor-components/ListColumn";
+import SignedOutPage from "./minor-components/SignedOutPage";
+import ListThumbnails from "./minor-components/ListThumbnails";
 
 import { Card, Paper, Button, TextField } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
@@ -195,49 +197,11 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, noList
     
     if(user && listDB && !activeList){
         return(
-            //button for creating new list
-            <Paper elevation={2} sx={{
-                margin: '2%',
-                boxShadow: "5px 5px 20px black",
-                padding: "20% 3% 3%",
-                minHeight: "81vh",
-            }}>
-                <Card sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    border: "none",
-                    boxShadow: "none"
-                }}>
-                    <h2>Your lists:</h2>
-                    <Button variant="text" onClick={()=>{newListPage()}}sx={{
-                        color: "#94d2bd",
-                        fontFamily: "Antonio, sans-serif",
-                        // textShadow: "-1px -1px 0 #003554b, 1px -1px 0 #003554b, -1px 1px 0 #003554b, 1px 1px 0 #003554b;",
-                        fontSize: "21px",
-                        width: "50%",
-                        padding: "0%",
-                        margin: "2%",
-                        alignSelf: "center",
-                        border: "1px solid #003554",
-                        bgcolor: "#003554",
-                        boxShadow: "1px 1px 5px black"
-                    }}>New List                                
-                    </Button>
-                </Card>
-                <Paper>
-                    {renderLists()}
-                </Paper>
-            </Paper>
+            <ListThumbnails newListPage={newListPage} renderLists={renderLists}></ListThumbnails>
         )
     }else if(!user){
         return(
-            <Paper elevation={2} sx={{
-                margin: '2%',
-                boxShadow: "5px 5px 20px black",
-                padding: "20% 3% 3%"
-            }}>
-                <h2>Sign in to manage your lists.</h2>
-            </Paper>
+            <SignedOutPage></SignedOutPage>
         )
     }else if(activeList && listDB){
         return(
