@@ -32,17 +32,15 @@ function App() {
   if(cookieActiveList){
       cookieActiveList = JSON.parse(cookieActiveList)
   }
-  let [activeList, setActiveList] = useState(cookieActiveList)
 
   //app-wide state variables
   let [thinScreen, setThinScreen] = useState(false)
   let [user, setUser] = useState(cookieUser)
   let [userDB, setUserDB] = useState('')
   let [listDB, setListDB] = useState(null)
-  let [windowAddress, setWindowAddress] = useState(null)
+  let [activeList, setActiveList] = useState(cookieActiveList)
 
   //user-specific states
-
   let [noLists, setNoLists] = useState(false)
   
   
@@ -67,7 +65,6 @@ function App() {
     fetchListDB()
     //screen size
     setThinScreen(thinScreenBool)
-    setWindowAddress(window.location.href)
   },[thinScreenBool, user, activeList])
 
 

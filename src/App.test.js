@@ -1,8 +1,32 @@
-import { render, screen } from '@testing-library/react';
+import { render, unmountComponentAtNode } from 'react-dom';
+import { act } from "react-dom/test-utils";
 import App from './App';
 
-test('renders !user page', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Sign in to manage your lists./i);
-  expect(linkElement).toBeInTheDocument();
+let container = null
+
+beforeEach(()=>{
+  container = document.createElement('div')
+  document.body.appendChild(container)
+})
+
+afterEach(() => {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
 });
+
+it('renders mock user data', async ()=>{
+  const fakeUser = {
+    user_id: 22341,
+    name: 'Jack Ersbo',
+    username: "jhersbo",
+    password: '1234'
+  }
+  jest.spyOn(global, 'fetch').mockImplementation(()=>{
+    Promise.resolve({
+      json: ()=> Promise.resolve(fakeUser)
+    })
+  })
+});
+
