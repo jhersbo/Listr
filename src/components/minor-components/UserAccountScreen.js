@@ -21,8 +21,8 @@ const UserAccountScreen = ({ user, handleLogout, buttonStyle })=>{
                     marginTop: "3%",
                 }}></ArrowBackIosNewIcon>
                 <h3>Account information</h3>
-                <h6>Username: {user.username}</h6>
-                <h6>Name: {user.name}</h6>
+                <h6 id="username-acc">Username: {user.username}</h6>
+                <h6 id="name-acc">Name: {user.name}</h6>
                 <Button variant="contained" onClick={()=>{handleLogout()}} sx={buttonStyle}>Logout</Button>
             </Card>
         </Paper>

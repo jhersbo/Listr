@@ -1,32 +1,6 @@
-import { render, unmountComponentAtNode } from 'react-dom';
-import { act } from "react-dom/test-utils";
+import { render, screen } from '@testing-library/react';
 import App from './App';
 
-let container = null
-
-beforeEach(()=>{
-  container = document.createElement('div')
-  document.body.appendChild(container)
-})
-
-afterEach(() => {
-  // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
+test('renders the landing page', () => {
+  render(<App />);
 });
-
-it('renders mock user data', async ()=>{
-  const fakeUser = {
-    user_id: 22341,
-    name: 'Jack Ersbo',
-    username: "jhersbo",
-    password: '1234'
-  }
-  jest.spyOn(global, 'fetch').mockImplementation(()=>{
-    Promise.resolve({
-      json: ()=> Promise.resolve(fakeUser)
-    })
-  })
-});
-
