@@ -65,7 +65,7 @@ const ListItem = ({ parsedItems, activeList, setActiveList, parsedColumns, setPa
                         display: "flex",
                         justifyContent: "space-between"
                     }}>
-                        <h5>{item.content}</h5>
+                        <h5 id="item-labels">{item.content}</h5>
                         <Button sx={{
                             
                         }} onClick={async ()=>{await deleteItem(index)}}>

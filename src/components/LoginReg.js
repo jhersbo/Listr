@@ -122,14 +122,14 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen, setActiveList}
                             <h3>Log in here!</h3>
                             <TextField
                             required
-                            id="outlined-required"
+                            id="filled-basic" variant="filled"
                             label="Username"
                             sx={textFieldStyle}
                             onChange={(e)=>{setUsername(e.target.value)}}
                             />
                             <TextField
                             required
-                            id="outlined-required"
+                            id="filled-basic" variant="filled"
                             label="Password"
                             sx={textFieldStyle}
                             onChange={(e)=>{setPassword(e.target.value)}}
@@ -174,28 +174,28 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen, setActiveList}
                             <h3>Register Here</h3>
                             <TextField
                             required
-                            id="outlined-required"
+                            id="filled-basic" variant="filled"
                             label="Legal Name"
                             sx={textFieldStyle}
                             onChange={(e)=>{setName(e.target.value)}}
                             />
                             <TextField
                             required
-                            id="outlined-required"
+                            id="filled-basic" variant="filled"
                             label="Username"
                             sx={textFieldStyle}
                             onChange={(e)=>{setUsername(e.target.value)}}
                             />
                             <TextField
                             required
-                            id="outlined-required"
+                            id="filled-basic" variant="filled"
                             label="Password"
                             sx={textFieldStyle}
                             onChange={(e)=>{setPassword(e.target.value)}}
                             />
                             <TextField
                             required
-                            id="outlined-required"
+                            id="filled-basic" variant="filled"
                             label="Confirm Password"
                             sx={textFieldStyle}
                             onChange={(e)=>{setPasswordCON(e.target.value)}}

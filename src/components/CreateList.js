@@ -29,10 +29,31 @@ const CreateList = ({ user })=>{
         let mappedState = numberColumns.map((element, index)=>{
             // setColIndex(index)
             return(
-                <Card>
-                    <TextField label={"Name your column!"} onChange={(e)=>{setTempColName(e.target.value)}}>
+                <Card sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    bgcolor: "#fefae0"
+                }}>
+                    <TextField label={"Enter column name"} onChange={(e)=>{setTempColName(e.target.value)}} sx={{
+                        bgcolor: "white",
+                        border: "4px inset #003554",
+                        borderRadius: "3%",
+                        margin: "2% 0%"
+                    }} id="filled-basic" variant="filled">
                     </TextField>
-                    <Button onClick={()=>{setListColumns([...listColumns, tempColName])}}>Save</Button>
+                    <Button onClick={()=>{setListColumns([...listColumns, tempColName])}} sx={{
+                        color: "#94d2bd",
+                        fontFamily: "Antonio, sans-serif",
+                        // textShadow: "-1px -1px 0 #003554b, 1px -1px 0 #003554b, -1px 1px 0 #003554b, 1px 1px 0 #003554b;",
+                        fontSize: "21px",
+                        width: "30%",
+                        padding: "0%",
+                        margin: "2%",
+                        alignSelf: "center",
+                        border: "1px solid #003554",
+                        bgcolor: "#003554",
+                        boxShadow: "1px 1px 5px black"
+                    }}>Save</Button>
                 </Card>
             )
         })
@@ -105,13 +126,17 @@ const CreateList = ({ user })=>{
                 }}>
                 <Card sx={{
                     bgcolor: "#fefae0",
-                    boxShadow: 'none'
+                    boxShadow: 'none',
+                    display: 'flex',
+                    flexDirection: 'column'
                 }}>
                     <ArrowBackIosNewIcon onClick={()=>{window.location.href = '/'}}></ArrowBackIosNewIcon>
                     <h2>Create your list:</h2>
-                    <TextField label="Name your list!" sx={{
+                    <TextField label="Enter list name" sx={{
                         bgcolor: 'white',
-                    }} onChange={(e)=>{setlistName(e.target.value)}}></TextField>
+                        border: "4px inset #003554",
+                        borderRadius: "3%",
+                    }} onChange={(e)=>{setlistName(e.target.value)}} id="filled-basic" variant="filled"></TextField>
                     {listColumns? 
                         <Card>
                             {renderColumnInputs()}

@@ -93,7 +93,7 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
                                     bgcolor: "white",
                                     margin: "0.5em",
                                     boxShadow: "1px 1px 7px black"
-                                }} onChange={(e)=>{setNewItemContent(e.target.value)}}></TextField>
+                                }} onChange={(e)=>{setNewItemContent(e.target.value)}} label="What would you like to add?" id="filled-basic" variant="filled"></TextField>
                                 <Button onClick={async ()=>{await saveNewListVersion(element)}} sx={{
                                     color: "#94d2bd",
                                     fontFamily: "Antonio, sans-serif",

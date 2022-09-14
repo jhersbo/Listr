@@ -42,7 +42,7 @@ function App() {
   let [windowAddress, setWindowAddress] = useState(null)
 
   //user-specific states
-  let [userListDB, setUserListDB] = useState('')
+
   let [noLists, setNoLists] = useState(false)
   
   
@@ -78,7 +78,7 @@ function App() {
         <HeroNav thinScreen={thinScreen} user={user} setUser={setUser}></HeroNav>
         <Routes>
           <Route path='/' element={
-            <ListArea thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} listDB={listDB} setListDB={setListDB} userListDB={userListDB} setUserListDB={setUserListDB} noLists={noLists} setNoLists={setNoLists} activeList={activeList} setActiveList={setActiveList}></ListArea>
+            <ListArea thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} listDB={listDB} setListDB={setListDB} noLists={noLists} setNoLists={setNoLists} activeList={activeList} setActiveList={setActiveList}></ListArea>
             }>
           </Route>
           <Route path='/create' element={

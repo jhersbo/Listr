@@ -12,18 +12,14 @@ import { useState, useEffect } from "react";
 //server URL
 const serverURL = "http://localhost:3000/"
 
-const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userListDB, setUserListDB, noLists, setNoLists, activeList, setActiveList })=>{
+const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, noLists, setNoLists, activeList, setActiveList })=>{
     
     
     let [clearList, setClearList] = useState(false)
 
     let [newListName, setNewListName] = useState('')
     let [editingListName, setEditingListName] = useState([false, null])
-    let [deleting, setDeleting] = useState(false)
-
-    if(deleting){
-        setDeleting(false)
-    }
+    let [userListDB, setUserListDB] = useState('')
 
     const setActiveListPersistence = (element)=>{
         console.log(element)
@@ -38,7 +34,10 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
     const assignUserLists = async ()=>{
         if(listDB !== null && user){
             let userListsArr = await listDB.filter(element => element.user_id === user.user_id)
-            setUserListDB(userListsArr)
+            let sortedByDate = userListsArr.sort((a, b)=>{
+                return Date.parse(b.date_created) - Date.parse(a.date_created)
+            })
+            setUserListDB(sortedByDate)
             // console.log(userListDB)
         }else{
             return
@@ -51,8 +50,7 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
     }
 
     //need to make it rerender on delete
-    const handleDeleteList = async (index)=>{
-        setDeleting(true)
+    const handleDeleteList = async (arr, element, index)=>{
         let response =  await fetch(serverURL + "lists", {
             method: "DELETE",
             headers: {
@@ -62,8 +60,8 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
                 list_id: userListDB[index].list_id
             })
         })
-        console.log(response)
-        setDeleting(false)
+        //only way I can get it to rerender
+        window.location.href = '/'
     }
 
     const handleListNameSave = async (index)=>{
@@ -107,11 +105,8 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
 
     const renderLists = ()=>{
         if(userListDB){
-            let sortedByDate = userListDB.sort((a, b)=>{
-                return Date.parse(b.date_created) - Date.parse(a.date_created)
-            })
             return(
-                sortedByDate.map((element, index)=>{
+                userListDB.map((element, index)=>{
                     return(
                         <div>
                             <Card key={index} sx={{
@@ -137,7 +132,7 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, userLi
                                                 color: "#003554"
                                             }}></EditIcon>
                                         </Button>
-                                        <Button onClick={()=>{handleDeleteList(index)}}>
+                                        <Button onClick={()=>{handleDeleteList(userListDB, element, index)}}>
                                             <DeleteIcon sx={{
                                                 padding: "none",
                                                 color: "#d62828",
