@@ -5,7 +5,17 @@ import { useState } from "react";
 
 const serverURL = "https://listr-server.herokuapp.com/"
 
-const ListItem = ({ parsedItems, activeList, setActiveList, parsedColumns, setParsedColumns, columnIndex, user })=>{
+type Props = {
+    parsedItems: any,
+    activeList: any,
+    setActiveList: React.Dispatch<React.SetStateAction<String>>,
+    parsedColumns: any,
+    setParsedColumns: React.Dispatch<React.SetStateAction<any>>,
+    columnIndex: any,
+    user: any
+}
+
+const ListItem = ({ parsedItems, activeList, setActiveList, parsedColumns, setParsedColumns, columnIndex, user }: Props)=>{
 
     let [update, setUpdate ] = useState(false)
 
@@ -14,7 +24,7 @@ const ListItem = ({ parsedItems, activeList, setActiveList, parsedColumns, setPa
         setUpdate(false)
     }
 
-    const deleteItem = async (index)=>{
+    const deleteItem = async (index: number)=>{
         let removed = parsedItems.splice(index, 1)
         console.log(removed)
         console.log(parsedItems)
