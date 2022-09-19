@@ -130,7 +130,7 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen, setActiveList}
                             />
                             <TextField
                             required
-                            id="filled-basic" variant="filled"
+                            id="filled-basic" variant="filled" type="password"
                             label="Password"
                             sx={textFieldStyle}
                             onChange={(e)=>{setPassword(e.target.value)}}
@@ -189,14 +189,14 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen, setActiveList}
                             />
                             <TextField
                             required
-                            id="filled-basic" variant="filled"
+                            id="filled-basic" variant="filled" type="password"
                             label="Password"
                             sx={textFieldStyle}
                             onChange={(e)=>{setPassword(e.target.value)}}
                             />
                             <TextField
                             required
-                            id="filled-basic" variant="filled"
+                            id="filled-basic" variant="filled" type="password"
                             label="Confirm Password"
                             sx={textFieldStyle}
                             onChange={(e)=>{setPasswordCON(e.target.value)}}
