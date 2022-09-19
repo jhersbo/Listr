@@ -48,7 +48,7 @@ function App() {
   const thinScreenBool = useMediaQuery('(max-width: 900px)')
 
   useEffect(()=>{
-    console.log('App.js is mounted.')
+    // console.log('App.js is mounted.')
     const fetchUserDB = async ()=>{
       let response = await fetch(serverURL + "users")
       let rData = await response.json()
@@ -59,7 +59,7 @@ function App() {
       let response = await fetch (serverURL + "lists")
       let rData = await response.json()
       setListDB(rData)
-      console.log(listDB)
+      // console.log(listDB)
     }
     fetchUserDB()
     fetchListDB()

@@ -24,7 +24,7 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, noList
     let [userListDB, setUserListDB] = useState('')
 
     const setActiveListPersistence = (element)=>{
-        console.log(element)
+        // console.log(element)
         setActiveList(element)
         Cookies.set('active', JSON.stringify(element))
     }
