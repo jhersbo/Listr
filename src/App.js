@@ -20,9 +20,6 @@ if(process.env.NODE_ENV === 'production'){
   serverURL = process.env.REACT_APP_LOCAL_SERVER
 }
 
-//local address
-const clientURL = "http://localhost:3001/"
-
 function App() {
 
   let cookieUser = Cookies.get('user')
