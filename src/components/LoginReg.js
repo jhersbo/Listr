@@ -8,15 +8,13 @@ import { fontSize, padding } from "@mui/system"
 
 import UserAccountScreen from "./minor-components/UserAccountScreen";
 
-const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen, setActiveList})=>{
+const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen, setActiveList, serverURL })=>{
     
     let [username, setUsername] = useState(user? user.username: '')
     let [password, setPassword] = useState(user? user.password: '')
     let [passwordCON, setPasswordCON] = useState(null)
     let [name, setName] = useState(user? user.name: '')
     let [newUser, setNewUser] = useState(false)
-    
-    const serverURL = "https://listr-server.herokuapp.com/"
 
     const buttonStyle = {
         marginTop: '2%',

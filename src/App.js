@@ -13,7 +13,8 @@ import HeroNav from './components/HeroNav';
 import CreateList from './components/CreateList';
 
 //server URL
-const serverURL = "https://listr-server.herokuapp.com/"
+// const serverURL = "https://listr-server.herokuapp.com/"
+const serverURL = "http://localhost:3000/"
 
 //local address
 const clientURL = "http://localhost:3001/"
@@ -75,14 +76,14 @@ function App() {
         <HeroNav thinScreen={thinScreen} user={user} setUser={setUser}></HeroNav>
         <Routes>
           <Route path='/' element={
-            <ListArea thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} listDB={listDB} setListDB={setListDB} noLists={noLists} setNoLists={setNoLists} activeList={activeList} setActiveList={setActiveList}></ListArea>
+            <ListArea thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} listDB={listDB} setListDB={setListDB} noLists={noLists} setNoLists={setNoLists} activeList={activeList} setActiveList={setActiveList} serverURL={serverURL}></ListArea>
             }>
           </Route>
           <Route path='/create' element={
-            <CreateList user={user}></CreateList>
+            <CreateList user={user} serverURL={serverURL}></CreateList>
           }></Route>
           <Route path='/user' element={
-          <LoginReg thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} setUserDB={setUserDB} activeList={activeList} setActiveList={setActiveList}></LoginReg>
+          <LoginReg thinScreen={thinScreen} user={user} setUser={setUser} userDB={userDB} setUserDB={setUserDB} activeList={activeList} setActiveList={setActiveList} serverURL={serverURL}></LoginReg>
           }>
           </Route>
         </Routes>
