@@ -13,8 +13,12 @@ import HeroNav from './components/HeroNav';
 import CreateList from './components/CreateList';
 
 //server URL
-// const serverURL = "https://listr-server.herokuapp.com/"
-const serverURL = "http://localhost:3000/"
+let serverURL;
+if(process.env.NODE_ENV === 'production'){
+  serverURL = process.env.REACT_APP_PROD_SERVER
+}else{
+  serverURL = process.env.REACT_APP_LOCAL_SERVER
+}
 
 //local address
 const clientURL = "http://localhost:3001/"
