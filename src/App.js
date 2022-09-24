@@ -8,7 +8,6 @@ import { useMediaQuery } from '@mui/material'
 //components
 import ListArea from './components/ListArea';
 import LoginReg from './components/LoginReg';
-import Footer from './components/Footer';
 import HeroNav from './components/HeroNav';
 import CreateList from './components/CreateList';
 
@@ -24,12 +23,9 @@ function App() {
 
   let cookieUser = Cookies.get('user')
   if(cookieUser){
-    // Cookies.set('user', undefined)
     cookieUser = JSON.parse(cookieUser)
   }
-
   // Cookies.expire('active')
-  
   let cookieActiveList = Cookies.get('active')
   if(cookieActiveList){
       cookieActiveList = JSON.parse(cookieActiveList)
@@ -45,12 +41,10 @@ function App() {
   //user-specific states
   let [noLists, setNoLists] = useState(false)
   
-  
   //screen size state
   const thinScreenBool = useMediaQuery('(max-width: 900px)')
 
   useEffect(()=>{
-    // console.log('App.js is mounted.')
     const fetchUserDB = async ()=>{
       let response = await fetch(serverURL + "users")
       let rData = await response.json()
@@ -58,10 +52,9 @@ function App() {
     }
 
     const fetchListDB = async ()=>{
-      let response = await fetch (serverURL + "lists")
+      let response = await fetch(serverURL + "lists")
       let rData = await response.json()
       setListDB(rData)
-      // console.log(listDB)
     }
     fetchUserDB()
     fetchListDB()
@@ -69,8 +62,6 @@ function App() {
     setThinScreen(thinScreenBool)
   },[thinScreenBool, user, activeList])
 
-
-  
   return (
     <div className="App">
       <Router>
@@ -91,7 +82,6 @@ function App() {
       </Router>
     </div>
   );
-  
 }
 
 export default App;

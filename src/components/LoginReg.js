@@ -95,8 +95,6 @@ const LoginReg = ({ user, setUser, userDB, setUserDB, thinScreen, setActiveList,
         }else{
             window.alert('Passwords do not match.')
         }
-        
-
     }
 
     if(!user){

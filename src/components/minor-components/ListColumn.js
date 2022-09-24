@@ -36,7 +36,6 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
             })
         })
         
-        
         await fetch(serverURL + "lists" , {
             method: "POST",
             headers: {
@@ -100,7 +99,6 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
                         :
                             null    
                         }
-
                         <Button sx={{
                             border: "1px solid #003554",
                             borderRadius: "15%",

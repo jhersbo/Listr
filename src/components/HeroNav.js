@@ -16,7 +16,6 @@ const HeroNav = ({ thinScreen, user, setUser})=>{
                 top: 0,
                 width: "100%",
                 zIndex: 100
-
             }}>
                 <h1 className="hero">Listr</h1>
                 <IconButton sx={{ 
@@ -29,9 +28,7 @@ const HeroNav = ({ thinScreen, user, setUser})=>{
                         marginRight: '0.5em',
                         boxShadow: '0px 1px 2px black',
                         backgroundColor: '#003554'
-                    }}
-                        
-                    >
+                    }}>
                         {user? user.name.charAt(0): <PersonIcon></PersonIcon>}
                     </Avatar>
                 </IconButton>

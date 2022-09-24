@@ -4,7 +4,6 @@ const handleClick = ()=>{
     window.location.href = '/user'
 }
 
-
 const SignedOutPage = ()=>{
     return(
         <Paper elevation={2} sx={{
