@@ -1,6 +1,7 @@
 import { Paper, Button, Card } from "@mui/material"
 
 const ListThumbnails = ({ newListPage, renderLists })=>{
+    
     return(
         <Paper elevation={2} sx={{
             margin: '2%',

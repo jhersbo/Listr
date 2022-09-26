@@ -18,6 +18,7 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, noList
     let [newListName, setNewListName] = useState('')
     let [editingListName, setEditingListName] = useState([false, null])
     let [userListDB, setUserListDB] = useState('')
+    let [sharedLists, setSharedLists] = useState('')
 
     const setActiveListPersistence = (element)=>{
         // console.log(element)
@@ -40,7 +41,12 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, noList
         }else{
             return
         }
-        //having issues setting the no list state. It will set the "no list" state if the API call takes too long, but will correct once the listDB variable is set. Maybe try .then in useEffect?
+    }
+
+    const assignSharedLists = ()=>{
+        if(listDB !== null && user){
+            //come back to this
+        }
     }
 
     const handleListNameEdits = (index)=>{

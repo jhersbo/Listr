@@ -1,6 +1,6 @@
 import './FontImports.css'
 import './sassStyles/sassStyles.scss'
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import Cookies from 'cookies-js'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import { useMediaQuery } from '@mui/material'
@@ -58,6 +58,7 @@ function App() {
     }
     fetchUserDB()
     fetchListDB()
+    console.log(listDB)
     //screen size
     setThinScreen(thinScreenBool)
   },[thinScreenBool, user, activeList])
