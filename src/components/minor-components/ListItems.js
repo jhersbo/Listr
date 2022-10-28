@@ -8,7 +8,6 @@ const serverURL = "https://listr-server.herokuapp.com/"
 const ListItem = ({ parsedItems, activeList, setActiveList, parsedColumns, setParsedColumns, columnIndex, user })=>{
 
     let [update, setUpdate ] = useState(false)
-
     //governs rerendering. switches state back and forth on each user input
     if(update){
         setUpdate(false)

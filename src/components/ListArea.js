@@ -5,16 +5,12 @@ import ListColumn from "./minor-components/ListColumn";
 import SignedOutPage from "./minor-components/SignedOutPage";
 import ListThumbnails from "./minor-components/ListThumbnails";
 
-import { Card, Paper, Button, TextField } from "@mui/material";
+import { Card, Button, TextField } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useState, useEffect } from "react";
 
-//server URL
-const serverURL = "https://listr-server.herokuapp.com/"
-
-const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, noLists, setNoLists, activeList, setActiveList })=>{
+const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, noLists, setNoLists, activeList, setActiveList, serverURL })=>{
     
     
     let [clearList, setClearList] = useState(false)
@@ -22,6 +18,7 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, noList
     let [newListName, setNewListName] = useState('')
     let [editingListName, setEditingListName] = useState([false, null])
     let [userListDB, setUserListDB] = useState('')
+    let [sharedLists, setSharedLists] = useState('')
 
     const setActiveListPersistence = (element)=>{
         // console.log(element)
@@ -44,7 +41,12 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, noList
         }else{
             return
         }
-        //having issues setting the no list state. It will set the "no list" state if the API call takes too long, but will correct once the listDB variable is set. Maybe try .then in useEffect?
+    }
+
+    const assignSharedLists = ()=>{
+        if(listDB !== null && user){
+            //come back to this
+        }
     }
 
     const handleListNameEdits = (index)=>{
@@ -53,7 +55,7 @@ const ListArea = ({ thinScreen, user, setUser, userDB, listDB, setListDB, noList
 
     //need to make it rerender on delete
     const handleDeleteList = async (arr, element, index)=>{
-        let response =  await fetch(serverURL + "lists", {
+        await fetch(serverURL + "lists", {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',

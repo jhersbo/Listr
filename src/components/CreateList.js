@@ -5,10 +5,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-//server URL
-const serverURL = "https://listr-server.herokuapp.com/"
-
-const CreateList = ({ user })=>{
+const CreateList = ({ user, serverURL })=>{
 
     let [listName, setlistName] = useState('')
     let [listColumns, setListColumns] = useState([])

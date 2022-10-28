@@ -7,10 +7,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ListItems from "./ListItems"
 import { useState } from "react";
 
-const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListDB, clearList, setClearList })=>{
-
-    //server URL
-    const serverURL = "https://listr-server.herokuapp.com/"
+const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListDB, clearList, setClearList, serverURL })=>{
 
     let [addingIndex, setAddingIndex] = useState(null)
     let [newItemContent, setNewItemContent] = useState('')
@@ -39,8 +36,7 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
             })
         })
         
-        
-        let response = await fetch(serverURL + "lists" , {
+        await fetch(serverURL + "lists" , {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -90,7 +86,6 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
                                 <Button onClick={async ()=>{await saveNewListVersion(element)}} sx={{
                                     color: "#94d2bd",
                                     fontFamily: "Antonio, sans-serif",
-                                    // textShadow: "-1px -1px 0 #003554b, 1px -1px 0 #003554b, -1px 1px 0 #003554b, 1px 1px 0 #003554b;",
                                     fontSize: "21px",
                                     width: "50%",
                                     padding: "0%",
@@ -104,7 +99,6 @@ const ListColumn = ({ activeList, setActiveList, user, setUser, listDB, setListD
                         :
                             null    
                         }
-
                         <Button sx={{
                             border: "1px solid #003554",
                             borderRadius: "15%",
